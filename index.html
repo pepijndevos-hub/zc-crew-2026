@@ -151,6 +151,12 @@ body{font-family:var(--body);font-size:15px;background:var(--bg);color:var(--tex
 .faq-a{display:none;padding:12px 16px;font-size:14px;color:var(--muted);line-height:1.6;border-top:1px solid var(--border);background:#151515}
 .faq-item.open .faq-a{display:block}
 
+/* WHATSAPP FAB */
+.wa-fab{position:fixed;bottom:24px;right:20px;z-index:200;display:flex;align-items:center;gap:10px;background:#25D366;color:#fff;border:none;border-radius:50px;padding:13px 18px 13px 14px;font-family:var(--body);font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 16px rgba(37,211,102,.4);text-decoration:none;transition:all .2s}
+.wa-fab:hover{background:#1ebe5d;transform:translateY(-2px);box-shadow:0 6px 20px rgba(37,211,102,.5)}
+.wa-fab:active{transform:translateY(0)}
+.wa-fab-icon{font-size:20px;line-height:1}
+.wa-fab-label{line-height:1}
 @media(max-width:380px){
   .card-grid,.loc-grid,.pause-grid{grid-template-columns:1fr}
   .card.wide{grid-column:auto}
@@ -446,5 +452,7 @@ document.addEventListener('click', function(e) {
   document.getElementById('fi'+i).classList.toggle('open');
 });
 </script>
+
+<a class="wa-fab" href="https://wa.me/31620316979?text=Hoi%20Pepijn%2C%20ik%20heb%20een%20vraag%20over%20de%20Zwarte%20Cross" target="_blank"><span class="wa-fab-icon">💬</span><span class="wa-fab-label">Vraag aan Pepijn</span></a>
 </body>
 </html>
