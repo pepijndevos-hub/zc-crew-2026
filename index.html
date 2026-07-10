@@ -3,220 +3,200 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>ZC 2026 — Crew Briefing</title>
+<title>ZC 2026 — Crew</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Barlow+Condensed:wght@700;800;900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@400;500;700&display=swap">
 <style>
-/* ─── RESET ───────────────────────────────────────────────── */
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 :root{
-  --bg:#0c0c0c;--surf:#181818;--surf2:#222;--border:#2e2e2e;--border2:#3a3a3a;
-  --text:#f0efeb;--muted:#888;--faint:#555;
-  --yellow:#f5c500;--orange:#e8500a;--green:#2db872;--red:#e04545;
-  --r:8px;--font:'Barlow',system-ui,sans-serif;--fontc:'Barlow Condensed',system-ui,sans-serif;
+  --bg:#111111;--surf:#1c1c1c;--surf2:#242424;--border:#2e2e2e;--border2:#3d3d3d;
+  --text:#f0f0f0;--muted:#888;--faint:#444;
+  --yellow:#ffd200;--red:#cc0000;--green:#1a7a3a;--r:6px;
+  --display:'Bebas Neue',Impact,sans-serif;--body:'Roboto',system-ui,sans-serif;
 }
 html{scroll-behavior:smooth}
-body{font-family:var(--font);font-size:15px;background:var(--bg);color:var(--text);line-height:1.55;min-height:100vh;padding-bottom:40px}
+body{font-family:var(--body);font-size:15px;background:var(--bg);color:var(--text);line-height:1.55;min-height:100vh;padding-bottom:48px}
 
-/* ─── HEADER ──────────────────────────────────────────────── */
-.site-header{background:#000;border-bottom:4px solid var(--yellow);padding:16px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-.logo{font-family:var(--fontc);font-size:22px;font-weight:900;letter-spacing:1px;text-transform:uppercase;color:var(--yellow);line-height:1}
-.logo small{display:block;font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--muted);text-transform:uppercase;margin-top:1px}
-.header-badge{background:var(--yellow);color:#000;font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;padding:4px 10px;border-radius:3px}
+/* HEADER */
+.hdr{background:#000;border-bottom:3px solid var(--yellow);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.hdr-logo{display:flex;align-items:center;gap:12px}
+.logo-zc{font-family:var(--display);font-size:26px;letter-spacing:2px;color:var(--yellow);line-height:1}
+.logo-divider{width:1px;height:26px;background:var(--border2)}
+.logo-sub{font-family:var(--display);font-size:14px;letter-spacing:1px;color:var(--muted);line-height:1.2}
+.hdr-badge{font-family:var(--display);font-size:13px;letter-spacing:1px;background:var(--yellow);color:#000;padding:4px 10px;border-radius:3px}
 
-/* ─── UPDATES BANNER ─────────────────────────────────────── */
-#updates-banner{display:none;background:#111;border-left:4px solid var(--yellow);margin:16px 16px 0;border-radius:var(--r);overflow:hidden}
-.update-header{padding:10px 14px 6px;display:flex;align-items:center;gap:8px}
-.update-dot{width:8px;height:8px;border-radius:50%;background:var(--yellow);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.update-title{font-family:var(--fontc);font-size:13px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--yellow)}
-.update-item{padding:8px 14px;border-top:1px solid var(--border)}
-.update-date{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;margin-bottom:2px}
-.update-text{font-size:14px;color:var(--text)}
+/* UPDATES */
+#updates-wrap{display:none;margin:14px 14px 0;border-left:4px solid var(--yellow);background:#161600;border-radius:var(--r);overflow:hidden}
+.upd-head{padding:8px 14px;display:flex;align-items:center;gap:8px}
+.upd-dot{width:7px;height:7px;border-radius:50%;background:var(--yellow);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.upd-title{font-family:var(--display);font-size:14px;letter-spacing:1px;color:var(--yellow)}
+.upd-item{border-top:1px solid #2a2800;padding:9px 14px}
+.upd-date{font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.upd-text{font-size:14px;color:var(--text)}
 
-/* ─── TABS ────────────────────────────────────────────────── */
-.tabs-wrap{position:sticky;top:73px;z-index:90;background:var(--bg);border-bottom:1px solid var(--border);padding:0 16px}
-.tabs{display:flex;gap:0;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+/* TABS */
+.tabs-rail{position:sticky;top:64px;z-index:90;background:var(--bg);border-bottom:1px solid var(--border)}
+.tabs{display:flex;overflow-x:auto;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
-.tab{flex-shrink:0;padding:12px 16px;font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:none;border:none;border-bottom:2px solid transparent;cursor:pointer;white-space:nowrap;transition:all .15s;margin-bottom:-1px}
-.tab:hover{color:var(--text)}
-.tab.active{color:var(--yellow);border-bottom-color:var(--yellow)}
-.panel{display:none;padding:20px 16px}.panel.active{display:block}
+.tab-btn{flex-shrink:0;padding:13px 18px;font-family:var(--display);font-size:14px;letter-spacing:1.5px;color:var(--muted);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;transition:all .15s;margin-bottom:-1px}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{color:var(--yellow);border-bottom-color:var(--yellow)}
+.panel{display:none;padding:20px 14px;animation:fadeIn .2s ease}
+.panel.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
 
-/* ─── SECTION TITLES ─────────────────────────────────────── */
-.sect{font-family:var(--fontc);font-size:11px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:28px 0 12px;display:flex;align-items:center;gap:10px}
+/* SECTION TITLE */
+.sect{font-family:var(--display);font-size:13px;letter-spacing:2px;color:var(--muted);margin:24px 0 10px;display:flex;align-items:center;gap:10px}
 .sect::after{content:'';flex:1;height:1px;background:var(--border)}
-.sect:first-child{margin-top:4px}
+.sect:first-child{margin-top:0}
 
-/* ─── INFO CARDS ─────────────────────────────────────────── */
-.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:4px}
-.info-card{background:var(--surf);border:1px solid var(--border);border-radius:var(--r);padding:14px}
-.info-card.full{grid-column:1/-1}
-.info-label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-.info-val{font-family:var(--fontc);font-size:20px;font-weight:800;color:var(--text);line-height:1.2}
-.info-sub{font-size:12px;color:var(--muted);margin-top:3px}
+/* CARDS */
+.card-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px}
+.card{background:var(--surf);border:1px solid var(--border);border-radius:var(--r);padding:14px}
+.card.wide{grid-column:1/-1}
+.card-lbl{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.card-val{font-family:var(--display);font-size:22px;letter-spacing:1px;color:var(--text);line-height:1.2}
+.card-sub{font-size:12px;color:var(--muted);margin-top:4px;line-height:1.5}
 
-/* ─── CTA BUTTONS ────────────────────────────────────────── */
-.btn-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:4px}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 18px;border-radius:var(--r);font-size:13px;font-weight:700;text-decoration:none;letter-spacing:.02em;transition:all .15s;border:none;cursor:pointer;white-space:nowrap}
-.btn-yellow{background:var(--yellow);color:#000}
-.btn-yellow:hover{background:#ffd000}
-.btn-green{background:#1a3d2a;color:#2db872;border:1px solid #1e5a38}
-.btn-orange{background:#2d1a0f;color:var(--orange);border:1px solid #4a2810}
-.btn-ghost{background:var(--surf);color:var(--text);border:1px solid var(--border2)}
-.btn-ghost:hover{border-color:var(--yellow);color:var(--yellow)}
-.btn svg{width:16px;height:16px;flex-shrink:0}
+/* BUS CARD */
+.bus-card{background:var(--yellow);border-radius:var(--r);padding:16px;margin-bottom:10px;display:flex;gap:14px;align-items:center}
+.bus-icon{font-size:32px;flex-shrink:0}
+.bus-info .bus-lbl{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:rgba(0,0,0,.6);margin-bottom:3px}
+.bus-info .bus-val{font-family:var(--display);font-size:22px;letter-spacing:1px;color:#000;line-height:1.2}
+.bus-info .bus-sub{font-size:12px;color:rgba(0,0,0,.65);margin-top:3px}
 
-/* ─── CONTACT CARDS ──────────────────────────────────────── */
-.contact-card{background:var(--surf);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
-.contact-info .contact-name{font-weight:700;font-size:15px}
-.contact-info .contact-role{font-size:12px;color:var(--muted);margin-top:1px}
-.contact-btns{display:flex;gap:6px;flex-shrink:0}
-.icon-btn{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;text-decoration:none;font-size:18px;border:none;cursor:pointer}
-.icon-btn.call{background:#1a3d2a}
-.icon-btn.wa{background:#0d2318}
+/* APP CARD */
+.app-card{display:flex;align-items:center;gap:14px;background:var(--surf);border:1px solid var(--border);border-radius:var(--r);padding:14px;text-decoration:none;margin-bottom:10px}
+.app-ico{width:48px;height:48px;background:var(--yellow);border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0}
+.app-name{font-family:var(--display);font-size:18px;letter-spacing:.5px;color:var(--text)}
+.app-sub{font-size:12px;color:var(--muted);margin-top:2px}
+.app-cta{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--yellow);margin-top:5px}
 
-/* ─── LOCATION CARDS ─────────────────────────────────────── */
-.loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+/* VIDEO */
+.video-wrap{position:relative;padding-bottom:56.25%;height:0;background:var(--surf);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;margin-bottom:10px}
+.video-wrap iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.video-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--faint)}
+.video-ph span{font-size:36px}.video-ph p{font-size:12px;font-weight:700;text-align:center}
+
+/* WORKPLACES */
+.loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
 .loc-card{background:var(--surf);border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
-.loc-img{width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--surf2);display:flex;align-items:center;justify-content:center}
-.loc-img-placeholder{width:100%;aspect-ratio:16/9;background:var(--surf2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;color:var(--faint)}
-.loc-img-placeholder span{font-size:28px}
-.loc-img-placeholder p{font-size:11px;font-weight:600;letter-spacing:.05em;text-transform:uppercase}
-.loc-body{padding:12px}
-.loc-name{font-family:var(--fontc);font-size:17px;font-weight:800;color:var(--text);margin-bottom:2px}
-.loc-desc{font-size:12px;color:var(--muted);line-height:1.4}
-.loc-badge{display:inline-block;margin-top:6px;font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;padding:2px 7px;border-radius:3px;background:rgba(245,197,0,.12);color:var(--yellow)}
+.loc-ph{aspect-ratio:16/9;background:var(--surf2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--faint)}
+.loc-ph span{font-size:26px}.loc-ph p{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.loc-body{padding:10px}
+.loc-name{font-family:var(--display);font-size:16px;letter-spacing:.5px;color:var(--text);margin-bottom:2px}
+.loc-desc{font-size:11px;color:var(--muted);line-height:1.4;margin-bottom:6px}
+.loc-tag{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;background:rgba(255,210,0,.12);color:var(--yellow);padding:2px 7px;border-radius:3px;display:inline-block}
 
-/* ─── RULES LIST ─────────────────────────────────────────── */
-.rules-list{list-style:none;display:flex;flex-direction:column;gap:2px}
-.rules-list li{background:var(--surf);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;font-size:14px;display:flex;gap:10px;align-items:flex-start;line-height:1.45}
-.rules-list li .icon{flex-shrink:0;font-size:16px;margin-top:1px}
-.rules-list li strong{color:var(--text)}
-.rules-list li.warn .icon::before{content:"⚠️"}
-.rules-list li.ok .icon::before{content:"✅"}
-.rules-list li.info-li .icon::before{content:"ℹ️"}
+/* TIPS */
+.tip-item{display:flex;gap:12px;align-items:flex-start;background:var(--surf);border:1px solid var(--border);border-radius:var(--r);padding:12px 13px;margin-bottom:6px;font-size:14px;line-height:1.5}
+.tip-ico{font-size:20px;flex-shrink:0;margin-top:1px}
 
-/* ─── KLEDINGSCHEMA ──────────────────────────────────────── */
-.kleding-table{width:100%;border-collapse:collapse;background:var(--surf);border-radius:var(--r);overflow:hidden;border:1px solid var(--border)}
-.kleding-table th{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);padding:10px 12px;text-align:left;background:var(--surf2);border-bottom:1px solid var(--border)}
-.kleding-table td{padding:10px 12px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:top}
-.kleding-table tr:last-child td{border-bottom:none}
+/* CONTACTS */
+.contact-card{background:var(--surf);border:1px solid var(--border);border-radius:var(--r);padding:14px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:8px}
+.ct-name{font-weight:700;font-size:15px;color:var(--text)}
+.ct-role{font-size:12px;color:var(--muted);margin-top:2px}
+.ct-btns{display:flex;gap:8px;flex-shrink:0}
+.ct-btn{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;text-decoration:none;border:none;cursor:pointer}
+.ct-btn.call{background:#1a3d2a}
+.ct-btn.wa{background:#0d2318}
+.cp-note{font-size:12px;color:var(--muted);line-height:1.6;margin-bottom:16px}
 
-/* ─── PAUZE TABEL ────────────────────────────────────────── */
-.pause-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.pause-item{background:var(--surf);border:1px solid var(--border);border-radius:6px;padding:10px 12px;display:flex;justify-content:space-between;align-items:center}
-.pause-dur{font-size:13px;color:var(--muted)}
-.pause-val{font-family:var(--fontc);font-size:16px;font-weight:800;color:var(--yellow)}
+/* RULES */
+.rule-item{display:flex;gap:12px;align-items:flex-start;background:var(--surf);border:1px solid var(--border);border-radius:var(--r);padding:12px 13px;margin-bottom:6px;font-size:14px;line-height:1.5}
+.rule-ico{font-size:18px;flex-shrink:0;margin-top:1px}
 
-/* ─── TIPS ───────────────────────────────────────────────── */
-.tips-list{display:flex;flex-direction:column;gap:6px}
-.tip-item{background:var(--surf);border:1px solid var(--border);border-radius:var(--r);padding:12px 14px;display:flex;gap:10px;align-items:flex-start;font-size:14px;line-height:1.45}
-.tip-icon{font-size:20px;flex-shrink:0}
+/* PAUZES */
+.pause-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:6px;margin-bottom:6px}
+.pause-item{background:var(--surf);border:1px solid var(--border);border-radius:var(--r);padding:10px 12px;display:flex;justify-content:space-between;align-items:center}
+.pause-dur{font-size:12px;color:var(--muted)}
+.pause-val{font-family:var(--display);font-size:17px;letter-spacing:.5px;color:var(--yellow)}
 
-/* ─── PAKLIJST ───────────────────────────────────────────── */
-.checklist-progress{background:var(--surf);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:16px}
-.progress-label{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:8px}
-.progress-bar-bg{height:8px;background:var(--border);border-radius:4px;overflow:hidden}
-.progress-bar-fill{height:100%;background:var(--yellow);border-radius:4px;transition:width .3s}
-.progress-text{font-family:var(--fontc);font-size:18px;font-weight:800;color:var(--text);margin-top:4px}
-.checklist-cat{margin-bottom:20px}
-.cat-title{font-family:var(--fontc);font-size:14px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:8px}
-.cat-title span{font-size:18px}
-.check-item{display:flex;align-items:center;gap:12px;background:var(--surf);border:1px solid var(--border);border-radius:6px;padding:11px 14px;margin-bottom:4px;cursor:pointer;transition:all .15s;-webkit-user-select:none;user-select:none}
-.check-item:active{transform:scale(.98)}
-.check-item.done{opacity:.5}
-.check-item.done .check-label{text-decoration:line-through}
-.check-box{width:22px;height:22px;border:2px solid var(--border2);border-radius:5px;flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:all .15s;font-size:13px}
-.check-item.done .check-box{background:var(--yellow);border-color:var(--yellow);color:#000}
-.check-label{font-size:14px;flex:1}
-.checklist-reset{background:none;border:1px solid var(--border);color:var(--muted);padding:10px 16px;border-radius:6px;font-size:13px;font-weight:600;cursor:pointer;width:100%;margin-top:8px}
+/* KLEDING */
+.kl-table{width:100%;border-collapse:collapse;background:var(--surf);border-radius:var(--r);overflow:hidden;border:1px solid var(--border);margin-bottom:8px}
+.kl-table th{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);padding:9px 12px;text-align:left;background:var(--surf2);border-bottom:1px solid var(--border)}
+.kl-table td{padding:10px 12px;border-bottom:1px solid var(--border);font-size:13px;vertical-align:top;color:var(--text)}
+.kl-table tr:last-child td{border-bottom:none}
 
-/* ─── FAQ ────────────────────────────────────────────────── */
+/* PAKLIJST */
+.progress-card{background:var(--surf);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:16px}
+.progress-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.progress-label{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
+.progress-count{font-family:var(--display);font-size:18px;letter-spacing:.5px;color:var(--text)}
+.progress-bg{height:6px;background:var(--border);border-radius:3px;overflow:hidden}
+.progress-fill{height:100%;background:var(--yellow);border-radius:3px;transition:width .4s}
+.progress-msg{font-size:12px;color:var(--muted);margin-top:6px}
+.cl-cat{margin-bottom:18px}
+.cl-cat-title{font-family:var(--display);font-size:15px;letter-spacing:1px;color:var(--muted);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.cl-item{display:flex;align-items:center;gap:12px;background:var(--surf);border:1px solid var(--border);border-radius:5px;padding:11px 14px;margin-bottom:4px;cursor:pointer;-webkit-user-select:none;user-select:none;transition:opacity .15s}
+.cl-item.done{opacity:.45}
+.cl-item.done .cl-label{text-decoration:line-through}
+.cl-box{width:22px;height:22px;border:2px solid var(--border2);border-radius:4px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;transition:all .15s}
+.cl-item.done .cl-box{background:var(--yellow);border-color:var(--yellow);color:#000;font-weight:700}
+.cl-label{font-size:14px;color:var(--text);flex:1}
+.cl-reset{width:100%;background:none;border:1px solid var(--border);color:var(--muted);padding:10px;border-radius:var(--r);font-size:13px;font-weight:600;cursor:pointer;margin-top:4px}
+.cl-reset:hover{border-color:var(--border2);color:var(--text)}
+
+/* FAQ */
 .faq-item{border:1px solid var(--border);border-radius:var(--r);margin-bottom:6px;overflow:hidden}
-.faq-q{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;cursor:pointer;font-weight:600;font-size:14px;background:var(--surf);gap:12px}
-.faq-q:active{background:var(--surf2)}
-.faq-arrow{color:var(--muted);font-size:18px;flex-shrink:0;transition:transform .2s}
+.faq-q{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:14px 16px;background:var(--surf);cursor:pointer;font-weight:600;font-size:14px;color:var(--text)}
+.faq-arrow{font-size:18px;color:var(--muted);transition:transform .2s;flex-shrink:0}
 .faq-item.open .faq-arrow{transform:rotate(180deg)}
-.faq-a{display:none;padding:12px 16px;font-size:14px;color:var(--muted);line-height:1.6;border-top:1px solid var(--border);background:#111}
+.faq-a{display:none;padding:12px 16px;font-size:14px;color:var(--muted);line-height:1.6;border-top:1px solid var(--border);background:#151515}
 .faq-item.open .faq-a{display:block}
 
-/* ─── ZC APP CARD ────────────────────────────────────────── */
-.app-card{background:linear-gradient(135deg,#1a1200 0%,var(--surf) 100%);border:1px solid #3a3000;border-radius:var(--r);padding:16px;display:flex;align-items:center;gap:16px;text-decoration:none;margin-bottom:12px}
-.app-icon{width:52px;height:52px;background:var(--yellow);border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
-.app-info .app-name{font-family:var(--fontc);font-size:18px;font-weight:800;color:var(--text)}
-.app-info .app-sub{font-size:12px;color:var(--muted);margin-top:2px}
-.app-info .app-cta{font-size:11px;font-weight:700;color:var(--yellow);text-transform:uppercase;letter-spacing:.05em;margin-top:6px}
-
-/* ─── VIDEO PLACEHOLDER ──────────────────────────────────── */
-.video-wrap{position:relative;padding-bottom:56.25%;height:0;overflow:hidden;border-radius:var(--r);background:var(--surf);border:1px solid var(--border);margin-bottom:12px}
-.video-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:0}
-.video-placeholder{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;color:var(--faint)}
-.video-placeholder span{font-size:40px}
-.video-placeholder p{font-size:12px;font-weight:600;text-align:center}
-
-/* ─── RESPONSIVE ─────────────────────────────────────────── */
-@media(max-width:400px){
-  .info-grid,.loc-grid,.pause-grid{grid-template-columns:1fr}
-  .info-card.full{grid-column:auto}
+@media(max-width:380px){
+  .card-grid,.loc-grid,.pause-grid{grid-template-columns:1fr}
+  .card.wide{grid-column:auto}
 }
 </style>
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════════════
-     CONFIG — Pas hier alle jaarlijkse info aan
-═══════════════════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════ CONFIG ══ -->
 <script>
-const CONFIG = {
+var CONFIG = {
   year: 2026,
   eventDates: 'Do 16 t/m Zo 19 juli',
-  campingOpen: 'Wo 15 juli (dag voor het event)',
-  campingClose: 'Ma 20 juli om 11:00 uur',
-  busInfo: 'Info volgt via de groepsapp',
+  campingOpen: 'Wo 15 juli',
+  campingClose: 'Ma 20 juli, 11:00 uur',
+  busInfo: 'Info volgt via groepsapp',
   busLocation: 'Grolsch Veste, Enschede',
-  festivalAddress: 'Eikendijk 9, Lichtenvoorde',
-  crewPointDay: 'Achter Pizza 2 (herkenbaar op het terrein)',
+  address: 'Eikendijk 9, Lichtenvoorde',
+  crewPointDay: 'Achter Pizza 2',
   crewPointMorning: 'Witte partytent op de crewcamping',
   contacts: [
-    { name: 'Pepijn de Vos', role: 'Coördinator StudentKelner', phone: '0620316979' },
-    { name: 'Anouk van de Luitgaren', role: 'Coördinator StudentKelner', phone: '0642497514' }
+    {name:'Pepijn de Vos', role:'Coordinator StudentKelner', phone:'0620316979'},
+    {name:'Anouk van de Luitgaren', role:'Coordinator StudentKelner', phone:'0642497514'}
   ],
   zcAppUrl: 'https://www.zwartecross.nl',
   videoUrl: 'https://www.youtube.com/embed/sROJxAi9Yrc',
-  updates: [
-    // Voeg hier updates toe, nieuwste bovenaan:
-    // { date: '10 jul', text: 'De bustijd is 14:00 uur vanaf de Grolsch Veste.' },
-  ]
+  updates: []
 };
 </script>
+<!-- ════════════════════════════════════════════ -->
 
-<!-- ═══════════════════════════════════════════════════════
-     HTML — hieronder hoef je niets aan te passen
-═══════════════════════════════════════════════════════ -->
-
-<header class="site-header">
-  <div class="logo">
-    Zwarte Cross
-    <small>Crew Briefing <span id="hdr-year"></span></small>
+<header class="hdr">
+  <div class="hdr-logo">
+    <div class="logo-zc">ZWARTE CROSS</div>
+    <div class="logo-divider"></div>
+    <div class="logo-sub">CREW<br>BRIEFING 2026</div>
   </div>
-  <div class="header-badge">3D Events</div>
+  <div class="hdr-badge">3D EVENTS</div>
 </header>
 
-<div id="updates-banner">
-  <div class="update-header">
-    <div class="update-dot"></div>
-    <div class="update-title">Updates</div>
-  </div>
+<div id="updates-wrap">
+  <div class="upd-head"><div class="upd-dot"></div><div class="upd-title">UPDATES</div></div>
   <div id="updates-list"></div>
 </div>
 
-<div class="tabs-wrap">
+<div class="tabs-rail">
   <div class="tabs">
-    <button class="tab active" onclick="sw('info')">Info</button>
-    <button class="tab" onclick="sw('werken')">Op het werk</button>
-    <button class="tab" onclick="sw('paklijst')">Paklijst</button>
-    <button class="tab" onclick="sw('faq')">FAQ</button>
+    <button class="tab-btn active" data-tab="info">INFO</button>
+    <button class="tab-btn" data-tab="werken">OP HET WERK</button>
+    <button class="tab-btn" data-tab="paklijst">PAKLIJST</button>
+    <button class="tab-btn" data-tab="faq">FAQ</button>
   </div>
 </div>
 
@@ -226,314 +206,228 @@ const CONFIG = {
 <div id="p-faq" class="panel"></div>
 
 <script>
-// ─── TAB SWITCHING ────────────────────────────────────────
-function sw(name) {
-  document.querySelectorAll('.tab').forEach(function(b,i){
-    b.classList.toggle('active', ['info','werken','paklijst','faq'][i] === name);
+// ── TAB SWITCHING ──────────────────────────────
+document.querySelectorAll('.tab-btn').forEach(function(btn) {
+  btn.addEventListener('click', function() {
+    var name = this.getAttribute('data-tab');
+    document.querySelectorAll('.tab-btn').forEach(function(b){ b.classList.remove('active'); });
+    this.classList.add('active');
+    document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
+    document.getElementById('p-'+name).classList.add('active');
   });
-  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
-  document.getElementById('p-'+name).classList.add('active');
-}
+});
 
-// ─── INIT ─────────────────────────────────────────────────
-document.getElementById('hdr-year').textContent = CONFIG.year;
-
-// Updates banner
-if (CONFIG.updates && CONFIG.updates.length > 0) {
-  document.getElementById('updates-banner').style.display = 'block';
+// ── UPDATES ────────────────────────────────────
+if (CONFIG.updates.length > 0) {
+  document.getElementById('updates-wrap').style.display = 'block';
   var ul = document.getElementById('updates-list');
   CONFIG.updates.forEach(function(u) {
-    ul.innerHTML += '<div class="update-item"><div class="update-date">'+u.date+'</div><div class="update-text">'+u.text+'</div></div>';
+    ul.innerHTML += '<div class="upd-item"><div class="upd-date">'+u.date+'</div><div class="upd-text">'+u.text+'</div></div>';
   });
 }
 
-// ─── TAB: INFO ────────────────────────────────────────────
-var c = CONFIG;
-var infoHTML = '';
+// ── TAB: INFO ──────────────────────────────────
+(function() {
+  var h = '';
+  h += '<div class="sect">HET EVENEMENT</div>';
+  h += '<div class="card-grid">';
+  h += '<div class="card wide"><div class="card-lbl">Evenementdagen</div><div class="card-val">'+CONFIG.eventDates+'</div><div class="card-sub">Camping open: '+CONFIG.campingOpen+'<br>Camping sluit: '+CONFIG.campingClose+'</div></div>';
+  h += '<div class="card wide"><div class="card-lbl">Locatie</div><div class="card-val" style="font-size:17px">'+CONFIG.address+'</div><div class="card-sub">Festivalterrein de Schans &mdash; Lichtenvoorde</div></div>';
+  h += '</div>';
 
-// Event info
-infoHTML += '<div class="sect">Het evenement</div>';
-infoHTML += '<div class="info-grid">';
-infoHTML += '<div class="info-card full"><div class="info-label">Evenementdagen</div><div class="info-val">'+c.eventDates+'</div><div class="info-sub">Camping open: '+c.campingOpen+'<br>Camping sluit: '+c.campingClose+'</div></div>';
-infoHTML += '<div class="info-card full"><div class="info-label">Locatie</div><div class="info-val" style="font-size:16px">'+c.festivalAddress+'</div><div class="info-sub">Festivalterrein de Schans, Lichtenvoorde</div></div>';
-infoHTML += '</div>';
+  h += '<div class="sect">BUS NAAR HET TERREIN</div>';
+  h += '<div class="bus-card"><div class="bus-icon">🚌</div><div class="bus-info"><div class="bus-lbl">Vertrektijd</div><div class="bus-val">'+CONFIG.busInfo+'</div><div class="bus-sub">Opstap: '+CONFIG.busLocation+'</div></div></div>';
 
-// Bus
-infoHTML += '<div class="sect">Bus naar het terrein</div>';
-infoHTML += '<div class="info-card full" style="margin-bottom:10px"><div class="info-label">Vertrek</div><div class="info-val" style="font-size:18px">'+c.busInfo+'</div><div class="info-sub">Opstaplocatie: '+c.busLocation+'</div></div>';
+  h += '<div class="sect">ZWARTE CROSS APP</div>';
+  h += '<a class="app-card" href="'+CONFIG.zcAppUrl+'" target="_blank"><div class="app-ico">🎪</div><div><div class="app-name">ZWARTE CROSS APP</div><div class="app-sub">Programma, plattegrond &amp; festivalinfo</div><div class="app-cta">Openen &rarr;</div></div></a>';
 
-// ZC App
-infoHTML += '<div class="sect">Zwarte Cross App</div>';
-infoHTML += '<a class="app-card" href="'+c.zcAppUrl+'" target="_blank">';
-infoHTML += '<div class="app-icon">🎪</div>';
-infoHTML += '<div class="app-info"><div class="app-name">Zwarte Cross App</div><div class="app-sub">Programma, plattegrond en festivalinfo</div><div class="app-cta">Openen →</div></div>';
-infoHTML += '</a>';
+  h += '<div class="sect">CREWCAMPING</div>';
+  if (CONFIG.videoUrl) {
+    h += '<div class="video-wrap"><iframe src="'+CONFIG.videoUrl+'" allowfullscreen></iframe></div>';
+  } else {
+    h += '<div class="video-wrap"><div class="video-ph"><span>&#127909;</span><p>Video volgt binnenkort</p></div></div>';
+  }
+  h += '<p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:4px">We overnachten op de speciale crewcamping. Tenten van 3D Events staan bij elkaar in ons toegewezen gebied. Sanitaire voorzieningen voor medewerkers aanwezig.</p>';
 
-// Video
-infoHTML += '<div class="sect">Crewcamping</div>';
-if (c.videoUrl) {
-  infoHTML += '<div class="video-wrap"><iframe src="'+c.videoUrl+'" allowfullscreen></iframe></div>';
-} else {
-  infoHTML += '<div class="video-wrap"><div class="video-placeholder"><span>🎬</span><p>Video volgt — Pepijn post een rondleiding van de crewcamping</p></div></div>';
-}
-infoHTML += '<p style="font-size:13px;color:var(--muted);margin-bottom:16px">We overnachten op de speciale crewcamping. Tenten van 3D Events staan bij elkaar in ons eigen gebied. Sanitaire voorzieningen zijn aanwezig voor medewerkers.</p>';
+  h += '<div class="sect">WERKPLEKKEN</div>';
+  var locs = [
+    {name:'Campingwinkel', desc:'24u supermarkt op de camping. Ontbijt, pizza, koffie en meer.', tag:'CAMPING', ico:'&#127978;'},
+    {name:'Pizza 1, 2 & 3', desc:'Drie vaste Dr. Oetker pizzatenten verspreid over het terrein.', tag:'FESTIVAL', ico:'&#127829;'},
+    {name:'Pizza Crossbaan', desc:'Pizzatent bij de motorcrossbaan. Druk tijdens de races.', tag:'CROSSBAAN', ico:'&#127949;'},
+    {name:'Festival All-Round', desc:'Unox karren en Ola kramen verspreid over het festivalterrein.', tag:'FESTIVAL', ico:'&#127998;'},
+    {name:'Unox Crossbaan', desc:'Mobiele Unox en Ola karretjes bij de crossbaan.', tag:'CROSSBAAN', ico:'&#127789;'}
+  ];
+  h += '<div class="loc-grid">';
+  locs.forEach(function(l) {
+    h += '<div class="loc-card"><div class="loc-ph"><span>'+l.ico+'</span><p>FOTO VOLGT</p></div><div class="loc-body"><div class="loc-name">'+l.name+'</div><div class="loc-desc">'+l.desc+'</div><span class="loc-tag">'+l.tag+'</span></div></div>';
+  });
+  h += '</div>';
 
-// Werkplekken
-infoHTML += '<div class="sect">Werkplekken</div>';
-infoHTML += '<div class="loc-grid">';
-var locs = [
-  { name:'Campingwinkel', desc:'24 uur open supermarkt op de camping. Ontbijt, pizza, koffie en meer. Grootste locatie.', badge:'Camping', icon:'🏪' },
-  { name:'Pizza 1, 2 & 3', desc:'Drie vaste Dr. Oetker pizzatenten verspreid over het festivalterrein.', badge:'Festival', icon:'🍕' },
-  { name:'Pizza Crossbaan', desc:'Pizzatent bij de motorcrossbaan. Druk tijdens de crossraces.', badge:'Crossbaan', icon:'🏍️' },
-  { name:'Festival All-Round', desc:'Unox karren en Ola kramen verspreid over het festivalterrein. Mobiele inzet.', badge:'Festival', icon:'🧆' },
-  { name:'Unox Crossbaan', desc:'Mobiele Unox en Ola kramen bij de crossbaan.', badge:'Crossbaan', icon:'🌭' },
-];
-locs.forEach(function(l){
-  infoHTML += '<div class="loc-card">';
-  infoHTML += '<div class="loc-img-placeholder"><span>'+l.icon+'</span><p>Foto volgt</p></div>';
-  infoHTML += '<div class="loc-body"><div class="loc-name">'+l.name+'</div><div class="loc-desc">'+l.desc+'</div><div class="loc-badge">'+l.badge+'</div></div>';
-  infoHTML += '</div>';
-});
-infoHTML += '</div>';
+  h += '<div class="sect">TIPS & TRICKS</div>';
+  var tips = [
+    ['&#128095;','Goede schoenen zijn alles. Je staat uren op een rij. Stevige werkschoenen of veiligheidsschoenen zijn geen overkill.'],
+    ['&#129393;','Blaarpleisters. Meer dan je denkt nodig te hebben.'],
+    ['&#128267;','Powerbank is essentieel. Laadpunten zijn schaars op het terrein.'],
+    ['&#128167;','Drink voor je shift al genoeg water. Je vergeet het tijdens het werk.'],
+    ['&#128564;','Slaapmasker en oordopjes zijn onmisbaar op de camping. Het wordt nooit echt stil.'],
+    ['&#9201;','Wandeling naar werkplek = minimaal 20 min. Reken dit altijd in.'],
+    ['&#127774;','Zonnebrand elke dag opnieuw, ook als het bewolkt lijkt.'],
+    ['&#127820;','Neem een snack mee voor in je werktas. Pauzes zijn kort.'],
+    ['&#128179;','Laat je portemonnee in je tent. Neem alleen wat nodig is.']
+  ];
+  tips.forEach(function(t) {
+    h += '<div class="tip-item"><div class="tip-ico">'+t[0]+'</div><div>'+t[1]+'</div></div>';
+  });
 
-// Tips
-infoHTML += '<div class="sect">Tips & tricks voor het festival</div>';
-var tips = [
-  ['👟','Goede schoenen zijn alles. Je staat uren op een rij — veiligheidsschoenen of stevige werkschoenen zijn geen overkill.'],
-  ['🩹','Blaarpleisters. Neem er meer mee dan je denkt nodig te hebben.'],
-  ['🔋','Powerbank is essentieel. Laadpunten zijn schaars op het terrein.'],
-  ['💧','Drink vóór je shift al genoeg water. Het is druk en warm, je vergeet het tijdens het werk.'],
-  ['😴','Slaapmasker en oordopjes zijn onmisbaar op de crewcamping. Het wordt 's nachts nooit echt stil.'],
-  ['⏱️','De wandeling naar je werkplek is minimaal 20 minuten. Reken dit altijd in — te laat starten is geen optie.'],
-  ['🎒','Laat je portemonnee en waardevolle spullen in je tent. Neem alleen wat je nodig hebt.'],
-  ['🧴','Zonnebrand elke dag opnieuw — ook als het bewolkt is.'],
-  ['🍌','Neem een houdbare snack mee voor in je werktas. Pauzes zijn kort en eten kopen kost tijd.'],
-];
-infoHTML += '<div class="tips-list">';
-tips.forEach(function(t){
-  infoHTML += '<div class="tip-item"><div class="tip-icon">'+t[0]+'</div><div>'+t[1]+'</div></div>';
-});
-infoHTML += '</div>';
+  document.getElementById('p-info').innerHTML = h;
+})();
 
-document.getElementById('p-info').innerHTML = infoHTML;
+// ── TAB: OP HET WERK ───────────────────────────
+(function() {
+  var h = '';
+  h += '<div class="sect">JOUW AANSPREEKPUNTEN</div>';
+  CONFIG.contacts.forEach(function(ct) {
+    var tel = '+31' + ct.phone.replace(/^0/,'');
+    h += '<div class="contact-card"><div><div class="ct-name">'+ct.name+'</div><div class="ct-role">'+ct.role+'</div></div>';
+    h += '<div class="ct-btns"><a class="ct-btn call" href="tel:'+tel+'">&#128222;</a><a class="ct-btn wa" href="https://wa.me/'+tel.replace('+','')+'">&#128172;</a></div></div>';
+  });
+  h += '<div class="cp-note">Overdag: <strong style="color:var(--text)">'+CONFIG.crewPointDay+'</strong><br>\'s Ochtends vroeg: <strong style="color:var(--text)">'+CONFIG.crewPointMorning+'</strong><br>\'s Nachts alleen bij noodgevallen &mdash; app Pepijn, hij belt terug.</div>';
 
-// ─── TAB: OP HET WERK ─────────────────────────────────────
-var werkHTML = '';
+  h += '<div class="sect">AANKOMST & TIJDEN</div>';
+  var times = [
+    ['&#128336;','Meld je <strong>45 minuten</strong> voor je shift op het 3D Events punt op de crewcamping.'],
+    ['&#128694;','Wandeling naar werkplek duurt <strong>minimaal 20 minuten.</strong>'],
+    ['&#128197;','Je rooster ontvang je <strong>een dag van tevoren.</strong>'],
+    ['&#8987;','Wees <strong>15 minuten</strong> voor je shift op de werklocatie.']
+  ];
+  times.forEach(function(t) {
+    h += '<div class="rule-item"><div class="rule-ico">'+t[0]+'</div><div>'+t[1]+'</div></div>';
+  });
 
-// Contacten
-werkHTML += '<div class="sect">Jouw aanspreekpunten</div>';
-c.contacts.forEach(function(ct){
-  werkHTML += '<div class="contact-card">';
-  werkHTML += '<div class="contact-info"><div class="contact-name">'+ct.name+'</div><div class="contact-role">'+ct.role+'</div></div>';
-  werkHTML += '<div class="contact-btns">';
-  werkHTML += '<a class="icon-btn call" href="tel:+31'+ct.phone.replace(/^0/,'')+'" title="Bellen">📞</a>';
-  werkHTML += '<a class="icon-btn wa" href="https://wa.me/31'+ct.phone.replace(/^0/,'')+'" target="_blank" title="WhatsApp">💬</a>';
-  werkHTML += '</div></div>';
-});
-werkHTML += '<p style="font-size:12px;color:var(--muted);margin-bottom:4px">Coördinatiepunt overdag: <strong style="color:var(--text)">'+c.crewPointDay+'</strong></p>';
-werkHTML += '<p style="font-size:12px;color:var(--muted);margin-bottom:16px">'s Ochtends: <strong style="color:var(--text)">'+c.crewPointMorning+'</strong></p>';
+  h += '<div class="sect">PAUZES (RICHTLIJN)</div>';
+  h += '<div class="pause-grid">';
+  [['Tot 4 uur','Geen'],['4 &ndash; 5 uur','15 min'],['5 &ndash; 8 uur','30 min'],['8 &ndash; 10 uur','45 min'],['10 uur +','60 min']].forEach(function(p) {
+    h += '<div class="pause-item"><span class="pause-dur">'+p[0]+'</span><span class="pause-val">'+p[1]+'</span></div>';
+  });
+  h += '</div><p style="font-size:12px;color:var(--muted);margin-bottom:16px">Kan afwijken afhankelijk van de drukte op dat moment.</p>';
 
-// Werktijden
-werkHTML += '<div class="sect">Aankomst & werktijden</div>';
-werkHTML += '<ul class="rules-list" style="margin-bottom:16px">';
-werkHTML += '<li class="info-li"><span class="icon"></span><span>Meld je <strong>45 minuten</strong> voor je shift op het 3D Events punt op de crewcamping.</span></li>';
-werkHTML += '<li class="info-li"><span class="icon"></span><span>De wandeling naar je werkplek duurt <strong>minimaal 20 minuten.</strong></span></li>';
-werkHTML += '<li class="info-li"><span class="icon"></span><span>Je rooster hoor je <strong>een dag van tevoren.</strong> Werktijden kunnen iets veranderen afhankelijk van de drukte.</span></li>';
-werkHTML += '<li class="info-li"><span class="icon"></span><span>Wees <strong>15 minuten</strong> voor je shift op de werklocatie — tijd om te drinken en kennis te maken.</span></li>';
-werkHTML += '</ul>';
+  h += '<div class="sect">KLEDING PER WERKPLEK</div>';
+  h += '<table class="kl-table"><thead><tr><th>Werkplek</th><th>Kleding</th></tr></thead><tbody>';
+  [['Pizza units','Dr. Oetker shirt + cap'],['Unox / Ola karretjes','Rode polo'],['Campingwinkel','T-shirt of polo 3D Events'],['Festival All-Round','Unox of Ola kleding']].forEach(function(k) {
+    h += '<tr><td><strong>'+k[0]+'</strong></td><td>'+k[1]+'</td></tr>';
+  });
+  h += '</tbody></table><p style="font-size:12px;color:var(--muted);margin-bottom:16px">Altijd een <strong style="color:var(--text)">lange zwarte of blauwe spijkerbroek.</strong> Shirt ontvang je op locatie en lever je aan het einde in.</p>';
 
-// Pauzes
-werkHTML += '<div class="sect">Pauzes (richtlijn)</div>';
-werkHTML += '<div class="pause-grid" style="margin-bottom:16px">';
-var pauses = [['Tot 4 uur','Geen pauze'],['4 – 5 uur','15 min'],['5 – 8 uur','30 min'],['8 – 10 uur','45 min'],['10 uur +','60 min']];
-pauses.forEach(function(p){
-  werkHTML += '<div class="pause-item"><span class="pause-dur">'+p[0]+'</span><span class="pause-val">'+p[1]+'</span></div>';
-});
-werkHTML += '</div>';
-werkHTML += '<p style="font-size:12px;color:var(--muted);margin-bottom:16px">Pauzetijden kunnen afwijken afhankelijk van de drukte op het moment.</p>';
+  h += '<div class="sect">HUISREGELS</div>';
+  var rules = [
+    ['&#128721;','<strong>Geen alcohol of drugs</strong> voor of tijdens je dienst. Bij vermoeden word je direct uitgesloten van werkzaamheden.'],
+    ['&#128721;','<strong>Geen diefstal</strong> of gratis weggeven aan bekenden. Hierop volgt aangifte.'],
+    ['&#128683;','Je werkshirt mag <strong>niet</strong> gedragen worden buiten je dienst op het terrein.'],
+    ['&#128683;','Roken alleen in pauzes, buiten zicht van bezoekers, met toestemming leidinggevende.'],
+    ['&#9989;','Kapot armbandje? Meld bij je leidinggevende &mdash; te wisselen bij de organisatie.'],
+    ['&#9989;','Eten: ontbijt op camping. Gratis drinken in crewcatering, ook buiten je dienst.']
+  ];
+  rules.forEach(function(r) {
+    h += '<div class="rule-item"><div class="rule-ico">'+r[0]+'</div><div>'+r[1]+'</div></div>';
+  });
 
-// Kleding
-werkHTML += '<div class="sect">Kledingvoorschrift per werkplek</div>';
-werkHTML += '<table class="kleding-table" style="margin-bottom:8px"><thead><tr><th>Werkplek</th><th>Kleding</th></tr></thead><tbody>';
-var kleding = [
-  ['Pizza units','Dr. Oetker pizza shirt + cap'],
-  ['Unox / Ola karretjes','Rode polo'],
-  ['Campingwinkel','T-shirt of polo van 3D Events'],
-  ['Festival All-Round','Unox of Ola kleding'],
-];
-kleding.forEach(function(k){
-  werkHTML += '<tr><td><strong>'+k[0]+'</strong></td><td>'+k[1]+'</td></tr>';
-});
-werkHTML += '</tbody></table>';
-werkHTML += '<p style="font-size:12px;color:var(--muted);margin-bottom:16px">Altijd een <strong style="color:var(--text)">lange zwarte of blauwe spijkerbroek</strong> — beschermt je benen. Je shirt ontvang je op locatie en lever je aan het einde van de dag in.</p>';
+  document.getElementById('p-werken').innerHTML = h;
+})();
 
-// Regels
-werkHTML += '<div class="sect">Huisregels</div>';
-werkHTML += '<ul class="rules-list">';
-var rules = [
-  ['warn','<strong>Geen alcohol of drugs</strong> vóór of tijdens je dienst. Bij vermoeden word je direct uitgesloten van werkzaamheden.'],
-  ['warn','<strong>Geen diefstal</strong> of gratis weggeven van producten aan bekenden. Hierop wordt aangifte gedaan.'],
-  ['ok','Je shirt mag <strong>niet</strong> gedragen worden op het festivalterrein buiten je dienst.'],
-  ['ok','Roken mag alleen in pauzes, buiten zicht van bezoekers, met toestemming van je leidinggevende.'],
-  ['ok','Armbandjes zijn persoonlijk — kapotte armbandjes geven geen toegang. Wissel bij de organisatie in overleg met je leidinggevende.'],
-  ['info-li','Eten: ontbijt op de camping. Gratis drinken in de crewcatering — ook voor en na je shift.'],
-];
-rules.forEach(function(r){
-  werkHTML += '<li class="'+r[0]+'"><span class="icon"></span><span>'+r[1]+'</span></li>';
-});
-werkHTML += '</ul>';
-
-document.getElementById('p-werken').innerHTML = werkHTML;
-
-// ─── TAB: PAKLIJST ────────────────────────────────────────
-var CHECKLIST = {
-  'Niet vergeten 🚨': [
-    'ID kaart of rijbewijs !!',
-    'Telefoon + oplader',
-    'Powerbank',
-    'Portemonnee',
-    'SK Kelnersmes',
-  ],
-  'Kleding 👕': [
-    '2 lange werkbroeken',
-    'Veiligheidsschoenen of stevige schoenen',
-    'Genoeg ondergoed & sokken',
-    'Trui of jas (voor de kou/nacht)',
-    'Regenponcho',
-    'Zonnebril',
-    'Leuke festivaloutfit(s)',
-    'Slaapshirt',
-  ],
-  'Kamperen ⛺': [
-    'Tent + haringen + hamer',
-    'Luchtbed + pomp',
-    'Slaapzak',
-    'Fleece deken',
-    'Kussen',
-    'Slaapmasker',
-    'Oordopjes',
-    'Lamp',
-    'Vuilniszak',
-  ],
-  'Persoonlijke verzorging 🧴': [
-    'Sneldrogende handdoek',
-    'Shampoo + bodywash',
-    'Slippers voor de douche',
-    'Tandenborstel + tandpasta',
-    'Deodorant',
-    'Zonnebrand SPF 30+',
-    'Anti-muggenspul',
-    'Haarverzorging',
-  ],
-  'Medicatie & EHBO 💊': [
-    'Paracetamol',
-    'Ibuprofen',
-    'Blaarpleisters (veel!)',
-    'Tape',
-    'Antihistamine (hooikoorts)',
-    'Dextro energytabs',
-  ],
-  'Eten & drinken 🍌': [
-    'Waterfles (minimaal 1L)',
-    'Houdbaar eten (mueslirepen etc.)',
-    'Drinken voor 's ochtends vroeg',
-    'Bordje, bestek, beker',
-  ],
-  'Extra's 🎒': [
-    'Oortjes / speaker',
-    'Speelkaarten',
-    'Paraplu',
-    'Festivaltasje voor overdag',
-    'Vochtige washandjes',
-  ],
+// ── TAB: PAKLIJST ──────────────────────────────
+var CHECKS = {
+  'NIET VERGETEN &#128680;': ['ID kaart of rijbewijs !!','Telefoon + oplader','Powerbank','Portemonnee','SK Kelnersmes'],
+  'KLEDING &#128085;': ['2 lange werkbroeken','Veiligheidsschoenen of stevige schoenen','Genoeg ondergoed & sokken','Trui of jas','Regenponcho','Zonnebril','Leuke festivaloutfit(s)','Slaapshirt'],
+  'KAMPEREN &#9978;': ['Tent + haringen + hamer','Luchtbed + pomp','Slaapzak','Fleece deken','Kussen','Slaapmasker','Oordopjes','Lamp','Vuilniszak'],
+  'VERZORGING &#129529;': ['Sneldrogende handdoek','Shampoo + bodywash','Douche slippers','Tandenborstel + pasta','Deodorant','Zonnebrand SPF 30+','Anti-muggenspul'],
+  'MEDICATIE &#128138;': ['Paracetamol','Ibuprofen','Blaarpleisters','Tape','Antihistamine (hooikoorts)','Dextro energytabs'],
+  'ETEN & DRINKEN &#127820;': ['Waterfles (1L+)','Houdbaar eten','Drinken voor vroeg in de ochtend','Bordje, bestek, beker'],
+  'EXTRA\'S &#127920;': ['Oortjes / speaker','Speelkaarten','Paraplu','Festivaltasje','Powerbank (extra)']
 };
 
-var stored = JSON.parse(localStorage.getItem('zc_checklist') || '{}');
+var stored = {};
+try { stored = JSON.parse(localStorage.getItem('zc26_cl') || '{}'); } catch(e) {}
 
-function saveChecklist() {
-  localStorage.setItem('zc_checklist', JSON.stringify(stored));
-  renderChecklist();
+function saveAndRender() {
+  try { localStorage.setItem('zc26_cl', JSON.stringify(stored)); } catch(e) {}
+  renderCL();
 }
 
-function toggleItem(key) {
+document.addEventListener('click', function(e) {
+  var item = e.target.closest('.cl-item');
+  if (!item) return;
+  var key = item.getAttribute('data-key');
+  if (!key) return;
   stored[key] = !stored[key];
-  saveChecklist();
-}
-
-function resetChecklist() {
-  if (confirm('Wil je alle vinkjes wissen?')) {
-    stored = {};
-    saveChecklist();
-  }
-}
-
-function renderChecklist() {
-  var total = 0, done = 0;
-  Object.values(CHECKLIST).forEach(function(items){ total += items.length; });
-  Object.values(stored).forEach(function(v){ if(v) done++; });
-
-  var html = '<div class="checklist-progress">';
-  html += '<div class="progress-label"><span>Voortgang</span><span>'+done+' / '+total+'</span></div>';
-  html += '<div class="progress-bar-bg"><div class="progress-bar-fill" style="width:'+Math.round(done/total*100)+'%"></div></div>';
-  html += '<div class="progress-text">'+(done===total?'✅ Alles ingepakt!':Math.round(done/total*100)+'% klaar')+'</div>';
-  html += '</div>';
-
-  var catIcons = {'Niet vergeten 🚨':'🚨','Kleding 👕':'👕','Kamperen ⛺':'⛺','Persoonlijke verzorging 🧴':'🧴','Medicatie & EHBO 💊':'💊','Eten & drinken 🍌':'🍌','Extra's 🎒':'🎒'};
-
-  Object.entries(CHECKLIST).forEach(function(entry){
-    var cat = entry[0], items = entry[1];
-    html += '<div class="checklist-cat">';
-    html += '<div class="cat-title"><span>'+catIcons[cat]+'</span>'+cat.replace(/[^a-zA-Z\s&]/g,'').trim()+'</div>';
-    items.forEach(function(item){
-      var key = cat+'::'+item;
-      var isDone = !!stored[key];
-      html += '<div class="check-item'+(isDone?' done':'')+'" onclick="toggleItem('+JSON.stringify(key)+')">';
-      html += '<div class="check-box">'+(isDone?'✓':'')+'</div>';
-      html += '<div class="check-label">'+item+'</div>';
-      html += '</div>';
-    });
-    html += '</div>';
-  });
-
-  html += '<button class="checklist-reset" onclick="resetChecklist()">Alles wissen en opnieuw beginnen</button>';
-  document.getElementById('p-paklijst').innerHTML = html;
-}
-
-// ─── TAB: FAQ ─────────────────────────────────────────────
-var faqData = [
-  ['Wanneer weet ik wanneer ik werk?', 'Je hoort je rooster een dag van tevoren. Werktijden kunnen iets veranderen afhankelijk van de drukte — dit hoor je op locatie van je leidinggevende.'],
-  ['Waar meld ik me aan bij aankomst?', 'Meld je bij Pepijn of Anouk. Overdag vind je ons achter Pizza 2. 's Ochtends vroeg starten we bij de witte partytent op de crewcamping. Neem eerst contact op met je uitzendbureau als je er nog niet bent.'],
-  ['Hoe kom ik op het festivalterrein?', 'Je krijgt een persoonlijk armbandje dat toegang geeft tot de crewcamping en het festivalterrein gedurende de periode dat je werkt. Armbandjes zijn niet overdraagbaar.'],
-  ['Hoe ver is het lopen naar mijn werkplek?', 'Minimaal 20 minuten. Zorg dat je 45 minuten voor je shift op het 3D Events punt op de crewcamping bent, zodat je gezamenlijk kunt vertrekken.'],
-  ['Krijg ik eten en drinken?', 'Ja. 3D Events verzorgt ontbijt op de crewcamping. In de crewcatering kun je altijd gratis drinken pakken, ook buiten je dienst. Er is ook de mogelijkheid om te eten voor en na je shift.'],
-  ['Mag ik alcohol drinken voor mijn dienst?', 'Nee. Geen alcohol of drugs vóór of tijdens je dienst. Bij het geringste vermoeden word je van verdere werkzaamheden uitgesloten en van het terrein verwijderd.'],
-  ['Wat als mijn armbandje kapot gaat?', 'Meld het direct bij je leidinggevende. In overleg wordt het gewisseld bij de organisatie. Een kapot armbandje geeft geen toegang.'],
-  ['Hoe zit het met betaling?', 'Na afloop van het festival neem je contact op met je uitzendbureau voor vragen over betaling en gewerkte uren.'],
-  ['Wat doe ik bij een noodgeval 's nachts?', ''s Nachts is Pepijn alleen bereikbaar bij noodgevallen. Als hij niet opneemt, stuur dan een appje met de reden — hij belt zo snel mogelijk terug.'],
-  ['Mag ik mijn telefoon gebruiken op het werk?', 'In overleg met je leidinggevende. Tijdens drukke momenten en bij klantcontact is telefoongebruik niet passend.'],
-  ['Waar kan ik douchen?', 'Er zijn sanitaire voorzieningen op de crewcamping, alleen toegankelijk voor medewerkers. Gebruik die — je collega's en bezoekers waarderen een fris ruikende collega.'],
-  ['Wat trek ik aan op het werk?', 'Altijd een lange zwarte of blauwe spijkerbroek. Je shirt of polo is afhankelijk van je werkplek en ontvang je op locatie. Zie het kledingschema op het tabblad "Op het werk".'],
-];
-
-var faqHTML = '';
-faqData.forEach(function(faq, i){
-  faqHTML += '<div class="faq-item" id="faq'+i+'">';
-  faqHTML += '<div class="faq-q" onclick="toggleFaq('+i+')">';
-  faqHTML += '<span>'+faq[0]+'</span><span class="faq-arrow">⌄</span>';
-  faqHTML += '</div>';
-  faqHTML += '<div class="faq-a">'+faq[1]+'</div>';
-  faqHTML += '</div>';
+  saveAndRender();
 });
 
-document.getElementById('p-faq').innerHTML = faqHTML;
+document.addEventListener('click', function(e) {
+  if (!e.target.classList.contains('cl-reset')) return;
+  if (confirm('Wil je alle vinkjes wissen?')) {
+    stored = {};
+    saveAndRender();
+  }
+});
 
-function toggleFaq(i) {
-  var el = document.getElementById('faq'+i);
-  el.classList.toggle('open');
+function renderCL() {
+  var total = 0, done = 0;
+  Object.values(CHECKS).forEach(function(items) { total += items.length; });
+  Object.keys(stored).forEach(function(k) { if (stored[k]) done++; });
+  var pct = total > 0 ? Math.round(done/total*100) : 0;
+
+  var h = '<div class="progress-card">';
+  h += '<div class="progress-top"><span class="progress-label">VOORTGANG</span><span class="progress-count">'+done+' / '+total+'</span></div>';
+  h += '<div class="progress-bg"><div class="progress-fill" style="width:'+pct+'%"></div></div>';
+  h += '<div class="progress-msg">'+(done===total && total>0?'&#10003; Alles ingepakt!':pct+'% klaar')+'</div></div>';
+
+  Object.entries(CHECKS).forEach(function(entry) {
+    var cat = entry[0], items = entry[1];
+    h += '<div class="cl-cat"><div class="cl-cat-title">'+cat+'</div>';
+    items.forEach(function(item) {
+      var key = cat + '|' + item;
+      var isDone = !!stored[key];
+      h += '<div class="cl-item'+(isDone?' done':'')+'" data-key="'+key.replace(/"/g,'&quot;')+'">';
+      h += '<div class="cl-box">'+(isDone?'&#10003;':'')+'</div>';
+      h += '<div class="cl-label">'+item+'</div></div>';
+    });
+    h += '</div>';
+  });
+
+  h += '<button class="cl-reset">Alles wissen en opnieuw beginnen</button>';
+  document.getElementById('p-paklijst').innerHTML = h;
 }
+renderCL();
 
-// Init checklist
-renderChecklist();
+// ── TAB: FAQ ───────────────────────────────────
+(function() {
+  var faqs = [
+    ['Wanneer weet ik wanneer ik werk?','Je hoort je rooster een dag van tevoren. Werktijden kunnen licht wijzigen afhankelijk van de drukte — je hoort dit op locatie.'],
+    ['Waar meld ik me aan bij aankomst?','Bij Pepijn of Anouk. Overdag: achter Pizza 2. \'s Ochtends vroeg: witte partytent op de crewcamping. Kom eerst langs voordat je je dienst start.'],
+    ['Hoe kom ik op het festivalterrein?','Je krijgt een persoonlijk armbandje voor de crewcamping en het festivalterrein. Niet overdraagbaar.'],
+    ['Hoe ver is het naar mijn werkplek?','Minimaal 20 minuten lopen. Meld je 45 minuten voor je shift op het 3D Events punt op de camping.'],
+    ['Krijg ik eten en drinken?','Ja. Ontbijt wordt geregeld op de camping. Gratis drinken in de crewcatering, ook buiten je dienst. Er is eetgelegenheid voor en na je shift.'],
+    ['Mag ik alcohol drinken voor mijn dienst?','Nee. Geen alcohol of drugs voor of tijdens je dienst. Bij het geringste vermoeden word je uitgesloten van werkzaamheden.'],
+    ['Wat als mijn armbandje kapot gaat?','Direct melden bij je leidinggevende. In overleg te wisselen bij de organisatie. Kapot = geen toegang.'],
+    ['Hoe zit het met betaling?','Na het festival neem je contact op met je uitzendbureau voor vragen over betaling en uren.'],
+    ['Wat doe ik bij noodgevallen \'s nachts?','App Pepijn met de reden. Hij belt je zo snel mogelijk terug.'],
+    ['Mag ik mijn telefoon gebruiken tijdens het werk?','In overleg met je leidinggevende. Niet tijdens klantcontact of drukke momenten.'],
+    ['Waar kan ik douchen?','Op de crewcamping zijn sanitaire voorzieningen uitsluitend voor medewerkers.'],
+    ['Wat trek ik aan op het werk?','Altijd een lange zwarte of blauwe spijkerbroek. Je shirt ontvang je op locatie en is werkplekafhankelijk. Zie het kledingschema.']
+  ];
+  var h = '';
+  faqs.forEach(function(faq, i) {
+    h += '<div class="faq-item" id="fi'+i+'"><div class="faq-q" data-faq="'+i+'"><span>'+faq[0]+'</span><span class="faq-arrow">&#8964;</span></div><div class="faq-a">'+faq[1]+'</div></div>';
+  });
+  document.getElementById('p-faq').innerHTML = h;
+})();
+
+document.addEventListener('click', function(e) {
+  var q = e.target.closest('.faq-q');
+  if (!q) return;
+  var i = q.getAttribute('data-faq');
+  document.getElementById('fi'+i).classList.toggle('open');
+});
 </script>
 </body>
 </html>
