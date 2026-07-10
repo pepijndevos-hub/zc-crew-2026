@@ -249,6 +249,8 @@ if (CONFIG.updates.length > 0) {
   h += '<div class="sect">BUS NAAR HET TERREIN</div>';
   h += '<div class="bus-card"><div class="bus-icon">🚌</div><div class="bus-info"><div class="bus-lbl">Vertrektijd</div><div class="bus-val">'+CONFIG.busInfo+'</div><div class="bus-sub">Opstap: '+CONFIG.busLocation+'</div></div></div>';
 
+  h += '<div class="sect">SOCIALE AGENDA</div>';
+  h += '<div class="card wide" style="border-left:3px solid var(--yellow);margin-bottom:10px"><div class="card-lbl">&#127789; BBQ WOENSDAGAVOND</div><div class="card-val" style="font-size:18px">18:30 uur</div><div class="card-sub">Voor wie donderdag vroeg aan de slag gaat. Locatie: crewcamping. Let op je aankomsttijd.</div></div>';
   h += '<div class="sect">ZWARTE CROSS APP</div>';
   h += '<a class="app-card" href="'+CONFIG.zcAppUrl+'" target="_blank"><div class="app-ico">🎪</div><div><div class="app-name">ZWARTE CROSS APP</div><div class="app-sub">Programma, plattegrond &amp; festivalinfo</div><div class="app-cta">Openen &rarr;</div></div></a>';
 
@@ -329,6 +331,16 @@ if (CONFIG.updates.length > 0) {
   });
   h += '</tbody></table><p style="font-size:12px;color:var(--muted);margin-bottom:16px">Altijd een <strong style="color:var(--text)">lange zwarte of blauwe spijkerbroek.</strong> Shirt ontvang je op locatie en lever je aan het einde in.</p>';
 
+  h += '<div class="sect">TELEFOON PER WERKPLEK</div>';
+  var telefoon = [
+    {loc:'Unox / Ola Runners', icon:'&#128241;', regel:'Houd je telefoon bij je en aan. Je zit in een WhatsApp groep met je team voor communicatie gedurende de dag.', kleur:'var(--yellow)'},
+    {loc:'Unox / Ola Jobbers', icon:'&#128241;', regel:'Neem je telefoon mee en sluit je oplader aan in de kar. Alleen gebruiken voor werk &#8212; niet voor privé.', kleur:'var(--yellow)'},
+    {loc:'Pizza units', icon:'&#128683;', regel:'Telefoon achterlaten bij het oplaadpunt op de werkplek (achter de schermen of in een tas). Niet bij je tijdens het werk.', kleur:'#e04545'},
+    {loc:'Campingwinkel', icon:'&#128683;', regel:'Telefoon achterlaten bij het oplaadpunt op de werkplek. Niet bij je tijdens het werk.', kleur:'#e04545'}
+  ];
+  telefoon.forEach(function(t) {
+    h += '<div class="rule-item" style="border-left:3px solid '+t.kleur+';margin-bottom:6px"><div class="rule-ico">'+t.icon+'</div><div><strong>'+t.loc+'</strong><br><span style="font-size:13px;color:var(--muted)">'+t.regel+'</span></div></div>';
+  });
   h += '<div class="sect">HUISREGELS</div>';
   var rules = [
     ['&#128721;','<strong>Geen alcohol of drugs</strong> voor of tijdens je dienst. Bij vermoeden word je direct uitgesloten van werkzaamheden.'],
