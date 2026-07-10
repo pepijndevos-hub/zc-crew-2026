@@ -120,7 +120,12 @@ body{font-family:var(--body);font-size:15px;background:var(--bg);color:var(--tex
 .kl-table tr:last-child td{border-bottom:none}
 
 /* PAKLIJST */
-.progress-card{background:var(--surf);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:16px}
+.progress-card{background:var(--surf);border:1px solid var(--border);border-radius:var(--r);padding:14px;margin-bottom:16px;position:sticky;top:107px;z-index:80;transition:padding .2s,font-size .2s}
+.progress-card.compact{padding:8px 12px}
+.progress-card.compact .progress-msg{display:none}
+.progress-card.compact .progress-count{font-size:13px}
+.progress-card.compact .progress-label{font-size:9px}
+.progress-card.compact .progress-bg{margin-top:4px}
 .progress-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .progress-label{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--muted)}
 .progress-count{font-family:var(--display);font-size:18px;letter-spacing:.5px;color:var(--text)}
@@ -381,13 +386,13 @@ function renderCL() {
   h += '<div class="progress-bg"><div class="progress-fill" style="width:'+pct+'%"></div></div>';
   h += '<div class="progress-msg">'+(done===total && total>0?'&#10003; Alles ingepakt!':pct+'% klaar')+'</div></div>';
 
-  Object.entries(CHECKS).forEach(function(entry) {
+  Object.entries(CHECKS).forEach(function(entry, ci) {
     var cat = entry[0], items = entry[1];
     h += '<div class="cl-cat"><div class="cl-cat-title">'+cat+'</div>';
-    items.forEach(function(item) {
-      var key = cat + '|' + item;
+    items.forEach(function(item, ii) {
+      var key = 'i_'+ci+'_'+ii;
       var isDone = !!stored[key];
-      h += '<div class="cl-item'+(isDone?' done':'')+'" data-key="'+key.replace(/"/g,'&quot;')+'">';
+      h += '<div class="cl-item'+(isDone?' done':'')+'" data-key="'+key+'">';
       h += '<div class="cl-box">'+(isDone?'&#10003;':'')+'</div>';
       h += '<div class="cl-label">'+item+'</div></div>';
     });
@@ -396,8 +401,20 @@ function renderCL() {
 
   h += '<button class="cl-reset">Alles wissen en opnieuw beginnen</button>';
   document.getElementById('p-paklijst').innerHTML = h;
+  // Re-apply compact if already scrolled
+  var panel = document.getElementById('p-paklijst');
+  if (panel && panel.scrollTop > 10) {
+    var pc = document.querySelector('.progress-card');
+    if (pc) pc.classList.add('compact');
+  }
 }
 renderCL();
+
+window.addEventListener('scroll', function() {
+  var pc = document.querySelector('.progress-card');
+  if (!pc) return;
+  pc.classList.toggle('compact', window.scrollY > 80);
+}, {passive: true});
 
 // ── TAB: FAQ ───────────────────────────────────
 (function() {
