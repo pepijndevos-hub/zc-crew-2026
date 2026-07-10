@@ -176,7 +176,7 @@ var CONFIG = {
     {name:'Anouk van de Luitgaren', role:'Coordinator StudentKelner', phone:'0642497514'}
   ],
   zcAppUrl: 'https://www.zwartecross.nl',
-  videoUrl: 'https://www.youtube.com/embed/l4bqpgGQ1kc',
+  videoUrl: 'https://drive.google.com/file/d/1a_NedEtYm3kzxqSzlWahgkIkdh1cIIg2/preview',
   updates: []
 };
 </script>
@@ -248,7 +248,7 @@ if (CONFIG.updates.length > 0) {
 
   h += '<div class="sect">CREWCAMPING</div>';
   if (CONFIG.videoUrl) {
-    h += '<div class="video-wrap"><iframe src="'+CONFIG.videoUrl+'" allowfullscreen></iframe></div>';
+    h += '<div class="video-wrap"><iframe src="'+CONFIG.videoUrl+'" allowfullscreen allow="autoplay"></iframe></div>';
   } else {
     h += '<div class="video-wrap"><div class="video-ph"><span>&#127909;</span><p>Video volgt binnenkort</p></div></div>';
   }
