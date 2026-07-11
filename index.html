@@ -250,8 +250,8 @@ var CONFIG = {
   eventDates: 'Do 16 t/m Zo 19 juli',
   campingOpen: 'Wo 15 juli',
   campingClose: 'Ma 20 juli, 11:00 uur',
-  busInfo: 'Info volgt via groepsapp',
-  busLocation: 'Grolsch Veste, Enschede',
+  busInfo: 'Donderdag 12:00 uur',
+  busLocation: 'Rotonde naast de Grolsch Veste, Enschede',
   address: 'Eikendijk 9, Lichtenvoorde',
   crewPointDay: 'Achter Pizza 2',
   crewPointMorning: 'Witte partytent op de crewcamping',
@@ -322,14 +322,18 @@ if (CONFIG.updates.length > 0) {
   h += '<div class="sect">HET EVENEMENT</div>';
   h += '<div class="card-grid">';
   h += '<div class="card wide"><div class="card-lbl">Evenementdagen</div><div class="card-val">'+CONFIG.eventDates+'</div><div class="card-sub">Camping open: '+CONFIG.campingOpen+'<br>Camping sluit: '+CONFIG.campingClose+'</div></div>';
+  h += '<div class="bus-card" style="background:#1a1a00;border-bottom-color:#c8a200"><div class="bus-icon">&#128652;</div><div class="bus-info"><div class="bus-lbl">Terugreis &mdash; maandag 20 juli</div><div class="bus-val">12:00 uur</div><div class="bus-sub">Ophalen: Huttendijk 12, crewcamping</div></div></div>';
   h += '<div class="card wide"><div class="card-lbl">Locatie</div><div class="card-val" style="font-size:17px">'+CONFIG.address+'</div><div class="card-sub">Festivalterrein de Schans &mdash; Lichtenvoorde</div></div>';
+  h += '<div class="bus-card" style="background:#1a1a00;border-bottom-color:#c8a200"><div class="bus-icon">&#128652;</div><div class="bus-info"><div class="bus-lbl">Terugreis &mdash; maandag 20 juli</div><div class="bus-val">12:00 uur</div><div class="bus-sub">Ophalen: Huttendijk 12, crewcamping</div></div></div>';
   h += '</div>';
 
   h += '<div class="sect">BUS NAAR HET TERREIN</div>';
-  h += '<div class="bus-card"><div class="bus-icon">🚌</div><div class="bus-info"><div class="bus-lbl">Vertrektijd</div><div class="bus-val">'+CONFIG.busInfo+'</div><div class="bus-sub">Opstap: '+CONFIG.busLocation+'</div></div></div>';
+  h += '<div class="bus-card"><div class="bus-icon">🚌</div><div class="bus-info"><div class="bus-lbl">Heenreis &mdash; donderdag 16 juli</div><div class="bus-val">'+CONFIG.busInfo+'</div><div class="bus-sub">Opstap: '+CONFIG.busLocation+'</div></div></div>';
+  h += '<div class="bus-card" style="background:#1a1a00;border-bottom-color:#c8a200"><div class="bus-icon">&#128652;</div><div class="bus-info"><div class="bus-lbl">Terugreis &mdash; maandag 20 juli</div><div class="bus-val">12:00 uur</div><div class="bus-sub">Ophalen: Huttendijk 12, crewcamping</div></div></div>';
 
   h += '<div class="sect">SOCIALE AGENDA</div>';
-  h += '<div class="sect">ZWARTE CROSS APP</div>';
+  h += '<div class="sect">ZWARTE CROSS APP & PROGRAMMA</div>';
+  h += '<div class="alert info" style="margin-bottom:10px">&#127917; Het <strong>blokkenschema</strong> staat in de ZC-app. Handig om te weten wanneer een grote act eindigt &mdash; dan wordt het direct druk bij jouw werkplek. <a href="https://www.zwartecross.nl/programma" target="_blank" style="color:var(--orange)">Bekijk ook online &rarr;</a></div>';
   h += '<div class="card wide" style="margin-bottom:10px"><div class="card-lbl">&#127978; ZWARTE CROSS APP</div><div style="font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.5">Programma, blokkenschema en plattegrond. Download v&oacute;&oacute;r het festival.</div><div style="display:flex;gap:10px;flex-wrap:wrap"><a href="https://apps.apple.com/nl/app/zwarte-cross/id1317710154" target="_blank" style="flex:1;min-width:130px;display:flex;align-items:center;gap:10px;background:#000;border:1px solid #333;border-radius:8px;padding:10px 14px;text-decoration:none"><span style="font-size:26px">&#63743;</span><div><div style="font-size:9px;color:#aaa;letter-spacing:.05em;text-transform:uppercase">Download in de</div><div style="font-size:15px;font-weight:700;color:#fff;font-family:var(--display);letter-spacing:.5px">App Store</div></div></a><a href="https://play.google.com/store/apps/details?id=com.appmiral.zwartecross" target="_blank" style="flex:1;min-width:130px;display:flex;align-items:center;gap:10px;background:#000;border:1px solid #333;border-radius:8px;padding:10px 14px;text-decoration:none"><span style="font-size:26px">&#9654;</span><div><div style="font-size:9px;color:#aaa;letter-spacing:.05em;text-transform:uppercase">Beschikbaar op</div><div style="font-size:15px;font-weight:700;color:#fff;font-family:var(--display);letter-spacing:.5px">Google Play</div></div></a></div></div>';
     h += '<div class="sect">PENDELBUS</div>';
   h += '<div class="card wide" style="margin-bottom:10px"><div class="card-lbl">&#128652; Pendeldienst showdagen</div>'
@@ -439,7 +443,7 @@ if (CONFIG.updates.length > 0) {
     ['&#128683;','Je werkshirt mag <strong>niet</strong> gedragen worden buiten je dienst op het terrein.'],
     ['&#128683;','Roken alleen in pauzes, buiten zicht van bezoekers, met toestemming leidinggevende.'],
     ['&#9989;','Kapot armbandje? Meld bij je leidinggevende &mdash; te wisselen bij de organisatie.'],
-    ['&#9989;','Gratis drinken in de crewcatering &#8212; je passeert die onderweg van Backstage West naar je werkplek. Neem altijd wat mee zodat je ook tijdens je dienst genoeg hebt.']
+    ['&#9989;','Gratis drinken in de crewcatering &#8212; je passeert die onderweg van Backstage West naar je werkplek. Neem altijd wat mee, ook naar de crewcamping. Zo heb je ook tijdens je dienst en 's avonds op de camping genoeg.']
   ];
   rules.forEach(function(r) {
     h += '<div class="rule-item"><div class="rule-ico">'+r[0]+'</div><div>'+r[1]+'</div></div>';
