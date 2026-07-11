@@ -355,15 +355,15 @@ if (CONFIG.updates.length > 0) {
 
   h += '<div class="sect">WERKPLEKKEN</div>';
   var locs = [
-    {name:'Campingwinkel', desc:'24u supermarkt op de camping. Ontbijt, pizza, koffie en meer.', tag:'CAMPING', ico:'&#127978;'},
-    {name:'Pizza 1, 2 & 3', desc:'Drie vaste Dr. Oetker pizzatenten verspreid over het terrein.', tag:'FESTIVAL', ico:'&#127829;'},
-    {name:'Pizza Crossbaan', desc:'Pizzatent bij de motorcrossbaan. Druk tijdens de races.', tag:'CROSSBAAN', ico:'&#127949;'},
-    {name:'Festival All-Round', desc:'Unox karren en Ola kramen verspreid over het festivalterrein.', tag:'FESTIVAL', ico:'&#127998;'},
-    {name:'Unox Crossbaan', desc:'Mobiele Unox en Ola karretjes bij de crossbaan.', tag:'CROSSBAAN', ico:'&#127789;'}
+    {name:'Campingwinkel', desc:'24u supermarkt op de camping. Ontbijt, pizza, koffie en meer.', tag:'CAMPING', img:'img-camping.jpg'},
+    {name:'Pizza 1, 2 & 3', desc:'Drie vaste Dr. Oetker pizzatenten verspreid over het terrein.', tag:'FESTIVAL', img:'img-pizza.jpg'},
+    {name:'Pizza Crossbaan', desc:'Pizzatent bij de motorcrossbaan. Druk tijdens de races.', tag:'CROSSBAAN', img:'img-pizza.jpg'},
+    {name:'Festival All-Round', desc:'Unox karren en Ola kramen verspreid over het festivalterrein.', tag:'FESTIVAL', img:'img-ola-cart.jpg'},
+    {name:'Unox Crossbaan', desc:'Mobiele Unox en Ola karretjes bij de crossbaan.', tag:'CROSSBAAN', img:'img-unox.jpg'}
   ];
   h += '<div class="loc-grid">';
   locs.forEach(function(l) {
-    h += '<div class="loc-card"><div class="loc-ph"><span>'+l.ico+'</span><p>FOTO VOLGT</p></div><div class="loc-body"><div class="loc-name">'+l.name+'</div><div class="loc-desc">'+l.desc+'</div><span class="loc-tag">'+l.tag+'</span></div></div>';
+    h += '<div class="loc-card"><img src="'+l.img+'" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block" alt="'+l.name+'"><div class="loc-body"><div class="loc-name">'+l.name+'</div><div class="loc-desc">'+l.desc+'</div><span class="loc-tag">'+l.tag+'</span></div></div>';
   });
   h += '</div>';
 
