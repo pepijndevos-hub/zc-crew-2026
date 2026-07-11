@@ -19,10 +19,10 @@ html{scroll-behavior:smooth}
 body{font-family:var(--body);font-size:15px;background:var(--bg);color:var(--text);line-height:1.55;min-height:100vh;padding-bottom:80px}
 
 /* HEADER */
+.sticky-top{position:sticky;top:0;z-index:100}
 .hdr{
   background:#000;border-bottom:4px solid var(--yellow);
-  padding:12px 16px;display:flex;align-items:center;justify-content:space-between;
-  position:sticky;top:0;z-index:100;gap:10px
+  padding:12px 16px;display:flex;align-items:center;justify-content:space-between;gap:10px
 }
 .hdr-left{display:flex;align-items:center}
 .logo-zc{
@@ -52,7 +52,7 @@ body{font-family:var(--body);font-size:15px;background:var(--bg);color:var(--tex
 .upd-text{font-size:14px;color:var(--text)}
 
 /* TABS */
-.tabs-rail{position:sticky;top:69px;z-index:90;background:var(--bg);border-bottom:2px solid #222}
+.tabs-rail{background:var(--bg);border-bottom:2px solid #222}
 .tabs{display:flex;overflow-x:auto;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
 .tab-btn{
@@ -161,7 +161,7 @@ body{font-family:var(--body);font-size:15px;background:var(--bg);color:var(--tex
   background:var(--surf);border:1px solid var(--border2);
   border-top:3px solid var(--yellow);
   border-radius:var(--r);padding:14px;margin-bottom:16px;
-  position:sticky;top:107px;z-index:80;transition:padding .2s
+  position:sticky;top:var(--sticky-h,96px);z-index:80;transition:padding .2s
 }
 .progress-card.compact{padding:8px 12px}
 .progress-card.compact .progress-msg{display:none}
@@ -266,7 +266,7 @@ var CONFIG = {
 </script>
 <!-- ════════════════════════════════════════════ -->
 
-<header class="hdr">
+<div class="sticky-top"><header class="hdr">
   <div class="hdr-logo">
     <div class="logo-zc">ZWARTE CROSS</div>
     <div class="logo-divider"></div>
@@ -287,6 +287,7 @@ var CONFIG = {
     <button class="tab-btn" data-tab="paklijst">PAKLIJST</button>
     <button class="tab-btn" data-tab="faq">FAQ</button>
   </div>
+</div>
 </div>
 
 <div id="p-info" class="panel active"></div>
@@ -523,6 +524,14 @@ window.addEventListener('scroll', function() {
   if (!pc) return;
   pc.classList.toggle('compact', window.scrollY > 80);
 }, {passive: true});
+
+// Set progress card offset to match actual sticky header height
+(function() {
+  var st = document.querySelector('.sticky-top');
+  if (st) {
+    document.documentElement.style.setProperty('--sticky-h', st.offsetHeight + 'px');
+  }
+})();
 
 // ── TAB: FAQ ───────────────────────────────────
 (function() {
