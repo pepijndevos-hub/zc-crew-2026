@@ -117,7 +117,7 @@ body{font-family:var(--body);font-size:15px;background:var(--bg);color:var(--tex
 .video-ph span{font-size:36px}.video-ph p{font-size:12px;font-weight:700;text-align:center}
 
 /* WORKPLACES */
-.loc-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.loc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
 .loc-card{background:var(--surf);border:1px solid var(--border2);border-radius:var(--r);overflow:hidden}
 .loc-ph{aspect-ratio:16/9;background:var(--surf2);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;color:var(--faint)}
 .loc-ph span{font-size:26px}.loc-ph p{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em}
@@ -356,10 +356,8 @@ if (CONFIG.updates.length > 0) {
   h += '<div class="sect">WERKPLEKKEN</div>';
   var locs = [
     {name:'Campingwinkel', desc:'24u supermarkt op de camping. Ontbijt, pizza, koffie en meer.', tag:'CAMPING', img:'img-camping.jpg?v=2'},
-    {name:'Pizza 1, 2 & 3', desc:'Drie vaste Dr. Oetker pizzatenten verspreid over het terrein.', tag:'FESTIVAL', img:'img-pizza.jpg?v=2'},
-    {name:'Pizza Crossbaan', desc:'Pizzatent bij de motorcrossbaan. Druk tijdens de races.', tag:'CROSSBAAN', img:'img-pizza-cb.jpg?v=2'},
-    {name:'Festival All-Round', desc:'Unox karren en Ola kramen verspreid over het festivalterrein.', tag:'FESTIVAL', img:'img-festival.jpg?v=2'},
-    {name:'Unox Crossbaan', desc:'Mobiele Unox en Ola karretjes bij de crossbaan.', tag:'CROSSBAAN', img:'img-unox-cb.jpg?v=2'}
+    {name:'Pizza', desc:'Drie vaste Dr. Oetker pizzatenten verspreid over het terrein.', tag:'FESTIVAL', img:'img-pizza.jpg?v=2'},
+    {name:'Unox / Ola', desc:'Unox karren en Ola kramen verspreid over het festivalterrein.', tag:'FESTIVAL', img:'img-festival.jpg?v=2'}
   ];
   h += '<div class="loc-grid">';
   locs.forEach(function(l) {
