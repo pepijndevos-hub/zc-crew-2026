@@ -256,8 +256,8 @@ var CONFIG = {
   crewPointDay: 'Achter Pizza 2',
   crewPointMorning: 'Witte partytent op de crewcamping',
   contacts: [
-    {name:'Pepijn de Vos', role:'Coordinator StudentKelner', phone:'0620316979'},
-    {name:'Anouk van de Luitgaren', role:'Coordinator StudentKelner', phone:'0642497514'}
+    {name:'Pepijn de Vos', role:'Contactpersoon personeel 3D', phone:'0620316979'},
+    {name:'Anouk van de Luitgaren', role:'Contactpersoon personeel 3D', phone:'0642497514'}
   ],
   zcAppUrl: 'https://www.zwartecross.nl',
   videoUrl: 'https://player.vimeo.com/video/1208824843',
@@ -321,19 +321,15 @@ if (CONFIG.updates.length > 0) {
   var h = '';
   h += '<div class="sect">HET EVENEMENT</div>';
   h += '<div class="card-grid">';
-  h += '<div class="card wide"><div class="card-lbl">Evenementdagen</div><div class="card-val">'+CONFIG.eventDates+'</div><div class="card-sub">Camping open: '+CONFIG.campingOpen+'<br>Camping sluit: '+CONFIG.campingClose+'</div></div>';
-  h += '<div class="bus-card" style="background:#1a1a00;border-bottom-color:#c8a200"><div class="bus-icon">&#128652;</div><div class="bus-info"><div class="bus-lbl">Terugreis &mdash; maandag 20 juli</div><div class="bus-val">12:00 uur</div><div class="bus-sub">Ophalen: Huttendijk 12, crewcamping</div></div></div>';
+  h += '<div class="card wide"><div class="card-lbl">Evenementdagen</div><div class="card-val">'+CONFIG.eventDates+'</div><div class="card-sub">Crewcamping open: '+CONFIG.campingOpen+'<br>Gastencamping open: Do 16 juli, 10:00 uur<br>Camping sluit: '+CONFIG.campingClose+'</div></div>';
   h += '<div class="card wide"><div class="card-lbl">Locatie</div><div class="card-val" style="font-size:17px">'+CONFIG.address+'</div><div class="card-sub">Festivalterrein de Schans &mdash; Lichtenvoorde</div></div>';
-  h += '<div class="bus-card" style="background:#1a1a00;border-bottom-color:#c8a200"><div class="bus-icon">&#128652;</div><div class="bus-info"><div class="bus-lbl">Terugreis &mdash; maandag 20 juli</div><div class="bus-val">12:00 uur</div><div class="bus-sub">Ophalen: Huttendijk 12, crewcamping</div></div></div>';
   h += '</div>';
 
   h += '<div class="sect">BUS NAAR HET TERREIN</div>';
   h += '<div class="bus-card"><div class="bus-icon">🚌</div><div class="bus-info"><div class="bus-lbl">Heenreis &mdash; donderdag 16 juli</div><div class="bus-val">'+CONFIG.busInfo+'</div><div class="bus-sub">Opstap: '+CONFIG.busLocation+'</div></div></div>';
-  h += '<div class="bus-card" style="background:#1a1a00;border-bottom-color:#c8a200"><div class="bus-icon">&#128652;</div><div class="bus-info"><div class="bus-lbl">Terugreis &mdash; maandag 20 juli</div><div class="bus-val">12:00 uur</div><div class="bus-sub">Ophalen: Huttendijk 12, crewcamping</div></div></div>';
+  h += '<div class="bus-card" style="background:#2a2200;border:1px solid #c8a200;border-bottom-width:3px"><div class="bus-icon">&#128652;</div><div class="bus-info"><div class="bus-lbl">Terugreis &mdash; maandag 20 juli</div><div class="bus-val">12:00 uur</div><div class="bus-sub">Ophalen: Huttendijk 12, crewcamping</div></div></div>';
 
-  h += '<div class="sect">SOCIALE AGENDA</div>';
-  h += '<div class="sect">ZWARTE CROSS APP & PROGRAMMA</div>';
-  h += '<div class="alert info" style="margin-bottom:10px">&#127917; Het <strong>blokkenschema</strong> staat in de ZC-app. Handig om te weten wanneer een grote act eindigt &mdash; dan wordt het direct druk bij jouw werkplek. <a href="https://www.zwartecross.nl/programma" target="_blank" style="color:var(--orange)">Bekijk ook online &rarr;</a></div>';
+  ttps://www.zwartecross.nl/programma" target="_blank" style="color:var(--orange)">Bekijk ook online &rarr;</a></div>';
   h += '<div class="card wide" style="margin-bottom:10px"><div class="card-lbl">&#127978; ZWARTE CROSS APP</div><div style="font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.5">Programma, blokkenschema en plattegrond. Download v&oacute;&oacute;r het festival.</div><div style="display:flex;gap:10px;flex-wrap:wrap"><a href="https://apps.apple.com/nl/app/zwarte-cross/id1317710154" target="_blank" style="flex:1;min-width:130px;display:flex;align-items:center;gap:10px;background:#000;border:1px solid #333;border-radius:8px;padding:10px 14px;text-decoration:none"><span style="font-size:26px">&#63743;</span><div><div style="font-size:9px;color:#aaa;letter-spacing:.05em;text-transform:uppercase">Download in de</div><div style="font-size:15px;font-weight:700;color:#fff;font-family:var(--display);letter-spacing:.5px">App Store</div></div></a><a href="https://play.google.com/store/apps/details?id=com.appmiral.zwartecross" target="_blank" style="flex:1;min-width:130px;display:flex;align-items:center;gap:10px;background:#000;border:1px solid #333;border-radius:8px;padding:10px 14px;text-decoration:none"><span style="font-size:26px">&#9654;</span><div><div style="font-size:9px;color:#aaa;letter-spacing:.05em;text-transform:uppercase">Beschikbaar op</div><div style="font-size:15px;font-weight:700;color:#fff;font-family:var(--display);letter-spacing:.5px">Google Play</div></div></a></div></div>';
     h += '<div class="sect">PENDELBUS</div>';
   h += '<div class="card wide" style="margin-bottom:10px"><div class="card-lbl">&#128652; Pendeldienst showdagen</div>'
@@ -373,15 +369,16 @@ if (CONFIG.updates.length > 0) {
 
   h += '<div class="sect">TIPS & TRICKS</div>';
   var tips = [
-    ['&#128095;','Goede schoenen zijn alles. Je staat uren op een rij. Stevige werkschoenen of veiligheidsschoenen zijn geen overkill.'],
+    ['&#128095;','Goede stevige schoenen zijn essentieel. Kies schoenen waar je goed op kan lopen en staan.'],
     ['&#129393;','Blaarpleisters. Meer dan je denkt nodig te hebben.'],
     ['&#128267;','Powerbank is essentieel. Laadpunten zijn schaars op het terrein.'],
     ['&#128167;','Drink voor je shift al genoeg water. Je vergeet het tijdens het werk.'],
-    ['&#128564;','Slaapmasker en oordopjes zijn onmisbaar op de camping. Het wordt nooit echt stil.'],
-    ['&#9201;','Loop je? Reken minimaal 20 minuten in. Er rijdt ook een pendelbus of neem een fiets.'],
+    ['&#128564;','Slaapmasker en oordopjes helpen enorm op de camping. Je slaapt er een stuk beter mee.'],
+    ['&#9201;','Loop je? Reken minimaal 20 minuten in naar je werkplek. Er rijdt ook een pendelbus.'],
     ['&#127774;','Zonnebrand elke dag opnieuw, ook als het bewolkt lijkt.'],
-    ['&#127820;','Neem een snack mee voor in je werktas. Pauzes zijn kort.'],
-    ['&#128179;','Laat je portemonnee in je tent. Neem alleen wat nodig is.']
+    ['&#127820;','Neem een snack mee voor in je werktas voor tijdens je pauze.'],
+    ['&#128179;','Laat je portemonnee in je tent. Neem alleen wat nodig is.'],
+    ['&#128176;','Neem je geld of munten mee naar de werkplek? Geef dit aan bij je leidinggevende.']
   ];
   tips.forEach(function(t) {
     h += '<div class="tip-item"><div class="tip-ico">'+t[0]+'</div><div>'+t[1]+'</div></div>';
@@ -406,7 +403,7 @@ if (CONFIG.updates.length > 0) {
     ['&#128336;','Meld je <strong>45 minuten</strong> voor je shift op het 3D Events punt op de crewcamping.'],
     ['&#128694;','Wandeling naar werkplek duurt <strong>minimaal 20 minuten.</strong>'],
     ['&#128197;','Je rooster ontvang je <strong>een dag van tevoren.</strong>'],
-    ['&#8987;','Wees <strong>15 minuten</strong> voor je shift op de werklocatie.']
+    ['&#8987;','Wees <strong>15 minuten</strong> voor je shift op de werklocatie. Ben je 30 minuten eerder, dan kun je alvast wat eten.']
   ];
   times.forEach(function(t) {
     h += '<div class="rule-item"><div class="rule-ico">'+t[0]+'</div><div>'+t[1]+'</div></div>';
@@ -438,7 +435,8 @@ if (CONFIG.updates.length > 0) {
   });
   h += '<div class="sect">HUISREGELS</div>';
   var rules = [
-    ['&#128721;','<strong>Geen alcohol of drugs</strong> voor of tijdens je dienst. Bij vermoeden word je direct uitgesloten van werkzaamheden.'],
+    ['&#128721;','<strong>Geen alcohol</strong> voor of tijdens je dienst. Bij vermoeden word je direct uitgesloten van werkzaamheden.'],
+    ['&#128721;','<strong>Drugs zijn ten allen tijde verboden.</strong> Elk vermoeden van gebruik kan leiden tot direct naar huis gestuurd worden.'],
     ['&#128721;','<strong>Geen diefstal</strong> of gratis weggeven aan bekenden. Hierop volgt aangifte.'],
     ['&#128683;','Je werkshirt mag <strong>niet</strong> gedragen worden buiten je dienst op het terrein.'],
     ['&#128683;','Roken alleen in pauzes, buiten zicht van bezoekers, met toestemming leidinggevende.'],
@@ -493,11 +491,12 @@ function renderCL() {
   Object.values(CHECKS).forEach(function(items) { total += items.length; });
   Object.keys(stored).forEach(function(k) { if (stored[k]) done++; });
   var pct = total > 0 ? Math.round(done/total*100) : 0;
+  var isDone = done === total && total > 0;
 
   var h = '<div class="progress-card">';
   h += '<div class="progress-top"><span class="progress-label">VOORTGANG</span><span class="progress-count">'+done+' / '+total+'</span></div>';
   h += '<div class="progress-bg"><div class="progress-fill" style="width:'+pct+'%"></div></div>';
-  h += '<div class="progress-msg">'+(done===total && total>0?'&#10003; Alles ingepakt!':pct+'% klaar')+'</div></div>';
+  h += '<div class="progress-msg">'+(isDone?'&#10003; Alles ingepakt!':'')+'</div></div>';
 
   Object.entries(CHECKS).forEach(function(entry, ci) {
     var cat = entry[0], items = entry[1];
@@ -547,11 +546,11 @@ window.addEventListener('scroll', function() {
     ['Krijg ik eten en drinken?','Ja. Ontbijt wordt geregeld op de camping. Gratis drinken in de crewcatering, ook buiten je dienst. Er is eetgelegenheid voor en na je shift.'],
     ['Mag ik alcohol drinken voor mijn dienst?','Nee. Geen alcohol of drugs voor of tijdens je dienst. Bij het geringste vermoeden word je uitgesloten van werkzaamheden.'],
     ['Wat als mijn armbandje kapot gaat?','Direct melden bij je leidinggevende. In overleg te wisselen bij de organisatie. Kapot = geen toegang.'],
-    ['Hoe zit het met betaling?','Na het festival neem je contact op met je uitzendbureau voor vragen over betaling en uren.'],
-    ['Wat doe ik bij noodgevallen \'s nachts?','App Pepijn met de reden. Hij belt je zo snel mogelijk terug.'],
+    ['Hoe zit het met betaling?','Na afloop van elke dienst teken je voor je uren bij je leidinggevende. Na het festival neem je contact op met je uitzendbureau voor vragen over betaling.'],
+    ['Wat doe ik bij noodgevallen \'s nachts?','Meld het altijd bij je leidinggevende. Die zorgt voor de juiste opvolging.'],
     ['Mag ik mijn telefoon gebruiken tijdens het werk?','In overleg met je leidinggevende. Niet tijdens klantcontact of drukke momenten.'],
     ['Waar kan ik douchen?','Op de crewcamping zijn sanitaire voorzieningen uitsluitend voor medewerkers.'],
-    ['Wat trek ik aan op het werk?','Altijd een lange zwarte of blauwe spijkerbroek. Je shirt ontvang je op locatie en is werkplekafhankelijk. Zie het kledingschema.']
+    ['Wat trek ik aan op het werk?','Altijd een lange zwarte of blauwe spijkerbroek. Je shirt ontvang je op locatie. Een korte broek is alleen in overleg met je leidinggevende toegestaan en is niet voor elke functie mogelijk.']
   ];
   var h = '';
   faqs.forEach(function(faq, i) {
