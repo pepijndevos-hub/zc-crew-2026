@@ -235,6 +235,18 @@ body{font-family:var(--body);font-size:15px;background:var(--bg);color:var(--tex
 .alert.info-sm{padding:8px 14px;font-size:11px;background:#111;border:1px solid var(--border);border-left:3px solid var(--border2);color:var(--muted);border-radius:var(--r);margin-bottom:14px}
 
 /* RESPONSIVE */
+/* TRANSPORT ACCORDION */
+.transport-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:4px}
+.transport-item{border:1px solid var(--border2);border-radius:var(--r);overflow:hidden}
+.transport-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:8px;padding:12px 14px;background:var(--surf);border:none;cursor:pointer;text-align:left}
+.transport-btn:active{background:var(--surf2)}
+.transport-name{font-family:var(--display);font-size:15px;letter-spacing:.5px;color:var(--text);line-height:1}
+.transport-arrow{font-size:16px;color:var(--muted);transition:transform .2s;flex-shrink:0}
+.transport-item.open .transport-arrow{transform:rotate(180deg)}
+.transport-item.open .transport-btn{border-bottom:2px solid var(--yellow)}
+.transport-body{display:none;padding:0}
+.transport-item.open .transport-body{display:block}
+@media(max-width:580px){.transport-grid{grid-template-columns:1fr}}
 @media(max-width:380px){
   .card-grid,.loc-grid,.pause-grid{grid-template-columns:1fr}
   .card.wide{grid-column:auto}
@@ -325,9 +337,42 @@ if (CONFIG.updates.length > 0) {
   h += '<div class="card wide"><div class="card-lbl">Locatie</div><div class="card-val" style="font-size:17px">'+CONFIG.address+'</div><div class="card-sub">Festivalterrein de Schans &mdash; Lichtenvoorde</div></div>';
   h += '</div>';
 
-  h += '<div class="sect">BUS NAAR HET TERREIN</div>';
-  h += '<div class="bus-card"><div class="bus-icon">🚌</div><div class="bus-info"><div class="bus-lbl">Heenreis &mdash; donderdag 16 juli</div><div class="bus-val">'+CONFIG.busInfo+'</div><div class="bus-sub">Opstap: '+CONFIG.busLocation+'</div></div></div>';
-  h += '<div class="bus-card" style="background:#2a2200;border:1px solid #c8a200;border-bottom-width:3px"><div class="bus-icon">&#128652;</div><div class="bus-info"><div class="bus-lbl">Terugreis &mdash; maandag 20 juli</div><div class="bus-val">12:00 uur</div><div class="bus-sub">Ophalen: Huttendijk 12, crewcamping</div></div></div>';
+  h += '<div class="sect">VERVOER NAAR HET TERREIN</div>';
+  h += '<div class="transport-grid">';
+
+  // StudentKelner
+  h += '<div class="transport-item" id="tr-sk">';
+  h += '<button class="transport-btn" data-transport="tr-sk">';
+  h += '<div><div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:3px">Jouw partij</div><div class="transport-name">StudentKelner</div></div>';
+  h += '<span class="transport-arrow">&#8964;</span></button>';
+  h += '<div class="transport-body">';
+  h += '<div class="bus-card" style="border-radius:0;margin:0"><div class="bus-icon">&#128652;</div><div class="bus-info"><div class="bus-lbl">Heenreis &mdash; donderdag 16 juli</div><div class="bus-val">'+CONFIG.busInfo+'</div><div class="bus-sub">Opstap: '+CONFIG.busLocation+'</div></div></div>';
+  h += '<div class="bus-card" style="background:#2a2200;border:1px solid #c8a200;border-bottom-width:3px;border-radius:0;margin:0"><div class="bus-icon">&#128652;</div><div class="bus-info"><div class="bus-lbl">Terugreis &mdash; maandag 20 juli</div><div class="bus-val">12:00 uur</div><div class="bus-sub">Ophalen: Huttendijk 12, crewcamping</div></div></div>';
+  h += '</div></div>';
+
+  // MF Horeca
+  h += '<div class="transport-item" id="tr-mf">';
+  h += '<button class="transport-btn" data-transport="tr-mf">';
+  h += '<div><div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:3px">Jouw partij</div><div class="transport-name">MF Horeca</div></div>';
+  h += '<span class="transport-arrow">&#8964;</span></button>';
+  h += '<div class="transport-body" style="padding:14px 16px">';
+  h += '<div style="font-size:13px;line-height:1.6;color:var(--text)">';
+  h += '<strong>Heenreis</strong><br>Bus vanuit Groningen, vertrek <strong>08:00 uur</strong> vanaf het afgesproken punt.<br><br>';
+  h += '<strong>Vragen?</strong> Neem contact op met het kantoor van MF Horeca of Merlyn.';
+  h += '</div></div></div>';
+
+  // FestiSquad
+  h += '<div class="transport-item" id="tr-fs">';
+  h += '<button class="transport-btn" data-transport="tr-fs">';
+  h += '<div><div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:3px">Jouw partij</div><div class="transport-name">FestiSquad</div></div>';
+  h += '<span class="transport-arrow">&#8964;</span></button>';
+  h += '<div class="transport-body" style="padding:14px 16px">';
+  h += '<div style="font-size:13px;line-height:1.6;color:var(--text)">';
+  h += 'Houd de vervoersplanning aan zoals deze gecommuniceerd is vanuit het kantoor van FestiSquad.<br><br>';
+  h += '<strong>Vragen?</strong> Neem contact op met het kantoor van FestiSquad of Jordi Stet.';
+  h += '</div></div></div>';
+
+  h += '</div>';
 
   ttps://www.zwartecross.nl/programma" target="_blank" style="color:var(--orange)">Bekijk ook online &rarr;</a></div>';
   h += '<div class="card wide" style="margin-bottom:10px"><div class="card-lbl">&#127978; ZWARTE CROSS APP</div><div style="font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.5">Programma, blokkenschema en plattegrond. Download v&oacute;&oacute;r het festival.</div><div style="display:flex;gap:10px;flex-wrap:wrap"><a href="https://apps.apple.com/nl/app/zwarte-cross/id1317710154" target="_blank" style="flex:1;min-width:130px;display:flex;align-items:center;gap:10px;background:#000;border:1px solid #333;border-radius:8px;padding:10px 14px;text-decoration:none"><span style="font-size:26px">&#63743;</span><div><div style="font-size:9px;color:#aaa;letter-spacing:.05em;text-transform:uppercase">Download in de</div><div style="font-size:15px;font-weight:700;color:#fff;font-family:var(--display);letter-spacing:.5px">App Store</div></div></a><a href="https://play.google.com/store/apps/details?id=com.appmiral.zwartecross" target="_blank" style="flex:1;min-width:130px;display:flex;align-items:center;gap:10px;background:#000;border:1px solid #333;border-radius:8px;padding:10px 14px;text-decoration:none"><span style="font-size:26px">&#9654;</span><div><div style="font-size:9px;color:#aaa;letter-spacing:.05em;text-transform:uppercase">Beschikbaar op</div><div style="font-size:15px;font-weight:700;color:#fff;font-family:var(--display);letter-spacing:.5px">Google Play</div></div></a></div></div>';
