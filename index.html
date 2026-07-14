@@ -48,7 +48,9 @@ body{font-family:var(--body);font-size:15px;background:var(--bg);color:var(--tex
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 .upd-title{font-family:var(--display);font-size:14px;letter-spacing:1.5px;color:var(--yellow);text-transform:uppercase}
 .upd-item{border-top:1px solid #2a2800;padding:9px 14px}
+.upd-item.upd-new{background:rgba(255,210,0,.06)}
 .upd-date{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--orange);margin-bottom:2px}
+.upd-badge{display:inline-block;margin-left:6px;font-size:9px;font-weight:700;letter-spacing:.05em;background:var(--orange);color:#fff;padding:2px 6px;border-radius:2px;vertical-align:middle}
 .upd-text{font-size:14px;color:var(--text)}
 
 /* TABS */
@@ -275,6 +277,8 @@ var CONTENT = {
     label: 'Vraag aan Pepijn'
   },
 
+  // Nieuwe update toevoegen: {date:'15 juli, 14:30', iso:'2026-07-15T14:30:00', text:'...'}
+  // date = weergavetekst, iso = machine-leesbaar tijdstip (voor sortering + "NIEUW"-badge)
   updates: [],
 
   event: {
@@ -508,13 +512,34 @@ document.querySelectorAll('.tab-btn').forEach(function(btn) {
 document.getElementById('hdr-year').textContent = CONTENT.meta.year;
 
 // ── UPDATES ────────────────────────────────────
-if (CONTENT.updates.length > 0) {
-  document.getElementById('updates-wrap').style.display = 'block';
-  var ul = document.getElementById('updates-list');
-  CONTENT.updates.forEach(function(u) {
-    ul.innerHTML += '<div class="upd-item"><div class="upd-date">'+u.date+'</div><div class="upd-text">'+u.text+'</div></div>';
+(function() {
+  if (CONTENT.updates.length === 0) return;
+
+  var STORAGE_KEY = 'zc26_updates_seen';
+  var lastSeen = null;
+  try { lastSeen = localStorage.getItem(STORAGE_KEY); } catch(e) {}
+
+  var sorted = CONTENT.updates.slice().sort(function(a, b) {
+    return new Date(b.iso) - new Date(a.iso);
   });
-}
+  var newestIso = sorted[0].iso;
+  var unseenCount = 0;
+  if (lastSeen) {
+    sorted.forEach(function(u) { if (new Date(u.iso) > new Date(lastSeen)) unseenCount++; });
+  }
+
+  document.getElementById('updates-wrap').style.display = 'block';
+  document.querySelector('.upd-title').textContent = 'UPDATES' + (unseenCount > 0 ? ' \u2014 ' + unseenCount + ' NIEUW' : '');
+  document.querySelector('.upd-dot').style.animation = (lastSeen === null || unseenCount > 0) ? '' : 'none';
+
+  var ul = document.getElementById('updates-list');
+  sorted.forEach(function(u) {
+    var isNew = lastSeen && new Date(u.iso) > new Date(lastSeen);
+    ul.innerHTML += '<div class="upd-item'+(isNew?' upd-new':'')+'"><div class="upd-date">'+u.date+(isNew?' <span class="upd-badge">NIEUW</span>':'')+'</div><div class="upd-text">'+u.text+'</div></div>';
+  });
+
+  try { localStorage.setItem(STORAGE_KEY, newestIso); } catch(e) {}
+})();
 
 // ── TAB: INFO ──────────────────────────────────
 (function() {
