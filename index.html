@@ -261,6 +261,8 @@ body{font-family:var(--body);font-size:15px;background:var(--bg);color:var(--tex
 <!-- ═══════════════════════════════════════════════════════════════ -->
 <script>
 var CONTENT = {
+  // MEEST GEWIJZIGDE VELDEN: meta.year, event{}, contacts[], transport[], updates[]
+  // Telefoonnummer WhatsApp-knop = automatisch contacts[0].phone (niet los aanpassen)
 
   meta: {
     year: 2026,
@@ -268,7 +270,7 @@ var CONTENT = {
   },
 
   whatsapp: {
-    phone: '31619123439',
+    // phone wordt automatisch overgenomen van contacts[0] hieronder — daar niet los aanpassen
     text: 'Hoi Pepijn, ik heb een vraag over de Zwarte Cross',
     label: 'Vraag aan Pepijn'
   },
@@ -445,7 +447,7 @@ var CONTENT = {
 
   faq: [
     ['Wanneer weet ik wanneer ik werk?','Je hoort je rooster een dag van tevoren. Werktijden kunnen licht wijzigen afhankelijk van de drukte &#8212; je hoort dit op locatie.'],
-    ['Waar meld ik me aan bij aankomst?','Bij Pepijn of Anouk. Overdag: achter Pizza 2. \'s Ochtends vroeg: witte partytent op de crewcamping. Kom eerst langs voordat je je dienst start.'],
+    ['Waar meld ik me aan bij aankomst?','__ARRIVAL_ANSWER__'],
     ['Hoe kom ik op het festivalterrein?','Je krijgt een persoonlijk armbandje voor de crewcamping en het festivalterrein. Niet overdraagbaar.'],
     ['Hoe ver is het naar mijn werkplek?','Minimaal 20 minuten lopen. Meld je 45 minuten voor je shift op het 3D Events punt op de camping.'],
     ['Krijg ik eten en drinken?','Ja. Ontbijt wordt geregeld op de camping. Gratis drinken in de crewcatering, ook buiten je dienst. Er is eetgelegenheid voor en na je shift.'],
@@ -743,9 +745,12 @@ window.addEventListener('scroll', function() {
 
 // ── TAB: FAQ ───────────────────────────────────
 (function() {
+  var names = CONTENT.contacts.map(function(c){ return c.name.split(' ')[0]; }).join(' of ');
+  var arrivalAnswer = 'Bij '+names+'. Overdag: '+CONTENT.crewPointDay+'. \'s Ochtends vroeg: '+CONTENT.crewPointMorning+'. Kom eerst langs voordat je je dienst start.';
   var h = '';
   CONTENT.faq.forEach(function(faq, i) {
-    h += '<div class="faq-item" id="fi'+i+'"><div class="faq-q" data-faq="'+i+'"><span>'+faq[0]+'</span><span class="faq-arrow">&#8964;</span></div><div class="faq-a">'+faq[1]+'</div></div>';
+    var answer = faq[1] === '__ARRIVAL_ANSWER__' ? arrivalAnswer : faq[1];
+    h += '<div class="faq-item" id="fi'+i+'"><div class="faq-q" data-faq="'+i+'"><span>'+faq[0]+'</span><span class="faq-arrow">&#8964;</span></div><div class="faq-a">'+answer+'</div></div>';
   });
   document.getElementById('p-faq').innerHTML = h;
 })();
@@ -776,8 +781,9 @@ document.addEventListener('click', function(e) {
 <script>
 (function() {
   var w = CONTENT.whatsapp;
+  var phone = '31' + CONTENT.contacts[0].phone.replace(/^0/,'');
   var fab = document.getElementById('wa-fab');
-  fab.href = 'https://wa.me/'+w.phone+'?text='+encodeURIComponent(w.text);
+  fab.href = 'https://wa.me/'+phone+'?text='+encodeURIComponent(w.text);
   fab.querySelector('.wa-fab-label').textContent = w.label;
 })();
 </script>
