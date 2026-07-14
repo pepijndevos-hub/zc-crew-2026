@@ -255,34 +255,218 @@ body{font-family:var(--body);font-size:15px;background:var(--bg);color:var(--tex
 </head>
 <body>
 
-<!-- ═══════════════════════════════════ CONFIG ══ -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
+<!-- CONTENT — alle teksten, tijden en gegevens staan hier. Pas hier  -->
+<!-- aan wat je wilt wijzigen; de render-functies lezen dit object uit. -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
 <script>
-var CONFIG = {
-  year: 2026,
-  eventDates: 'Do 16 t/m Zo 19 juli',
-  campingOpen: 'Wo 15 juli',
-  campingClose: 'Ma 20 juli, 11:00 uur',
-  busInfo: 'Donderdag 12:00 uur',
-  busLocation: 'Rotonde naast de Grolsch Veste, Enschede',
-  address: 'Eikendijk 9, Lichtenvoorde',
-  crewPointDay: 'Achter Pizza 2',
-  crewPointMorning: 'Witte partytent op de crewcamping',
+var CONTENT = {
+
+  meta: {
+    year: 2026,
+    zcAppUrl: 'https://www.zwartecross.nl'
+  },
+
+  whatsapp: {
+    phone: '31619123439',
+    text: 'Hoi Pepijn, ik heb een vraag over de Zwarte Cross',
+    label: 'Vraag aan Pepijn'
+  },
+
+  updates: [],
+
+  event: {
+    eventDates: 'Do 16 t/m Zo 19 juli',
+    campingOpen: 'Wo 15 juli',
+    guestCampingOpen: 'Do 16 juli, 10:00 uur',
+    campingClose: 'Ma 20 juli, 11:00 uur',
+    address: 'Eikendijk 9, Lichtenvoorde',
+    addressSub: 'Festivalterrein de Schans — Lichtenvoorde'
+  },
+
+  facts: [
+    {lbl:'Editie', big:'15', small:'e jaar', sub:'Zwarte Cross sinds 1997'},
+    {lbl:'Bezoekers 2025', big:'277', small:'k', sub:'Groeit elk jaar'},
+    {lbl:'Per dag gemiddeld', big:'73', small:'.500', sub:'52% dagbezoeker &middot; 48% camping'},
+    {lbl:'Pizza slices 2025', big:'110', small:'k+', sub:'Op 4 locaties verkocht'},
+    {lbl:'Herkomst', big:'98', small:'%', sub:'Uit Nederland &middot; 37% Gelderland'},
+    {lbl:'Uitverkocht', valText:'Sinds 2016', sub:'Dit jaar 5% minder bezoekers gepland'}
+  ],
+
+  hours: [
+    {day:'Donderdag 16 juli', time:'15:00 &ndash; 02:30', sub:'Camping open vanaf 08:00. Crossbaan opent later.', wide:false},
+    {day:'Vrijdag 17 juli', time:'10:00 &ndash; 01:00', sub:'&nbsp;', wide:false},
+    {day:'Zaterdag 18 juli', time:'10:00 &ndash; 01:00', sub:'Drukste dag van het festival', wide:false},
+    {day:'Zondag 19 juli', time:'Wisselend per area', sub:'Mainstage + Theaterweide tot 23:30 &middot; Festivalterrein 2 tot 21:45 &middot; Megatent tot 24:00', wide:true}
+  ],
+
+  bbq: {
+    title: '&#127789; PERSONEELS BBQ',
+    time: 'Woensdagavond 19:00 uur',
+    desc: 'Locatie: bij de campingwinkel. Voor wie woensdag werkt of donderdag vroeg begint. Goede start van het festival samen!'
+  },
+
+  transport: [
+    {
+      id:'tr-sk', name:'StudentKelner',
+      type:'bus',
+      outbound:{label:'Heenreis &mdash; donderdag 16 juli', time:'Donderdag 12:00 uur', sub:'Opstap: Rotonde naast de Grolsch Veste, Enschede'},
+      inbound:{label:'Terugreis &mdash; maandag 20 juli', time:'12:00 uur', sub:'Ophalen: Huttendijk 12, crewcamping'}
+    },
+    {
+      id:'tr-mf', name:'MF Horeca',
+      type:'text',
+      html:'<strong>Heenreis</strong><br>Bus vanuit Groningen, vertrek <strong>08:00 uur</strong> vanaf het afgesproken punt.<br><br><strong>Vragen?</strong> Neem contact op met het kantoor van MF Horeca of Merlyn.'
+    },
+    {
+      id:'tr-fs', name:'FestiSquad',
+      type:'text',
+      html:'Houd de vervoersplanning aan zoals deze gecommuniceerd is vanuit het kantoor van FestiSquad.<br><br><strong>Vragen?</strong> Neem contact op met het kantoor van FestiSquad of Jordi Stet.'
+    }
+  ],
+
+  app: {
+    title: '&#127978; ZWARTE CROSS APP',
+    desc: 'Programma, blokkenschema en plattegrond. Download v&oacute;&oacute;r het festival.',
+    appStoreUrl: 'https://apps.apple.com/nl/app/zwarte-cross/id1317710154',
+    playStoreUrl: 'https://play.google.com/store/apps/details?id=com.appmiral.zwartecross'
+  },
+
+  pendelbus: {
+    title: '&#128652; Pendeldienst showdagen',
+    intro: 'Tijdens de showdagen rijden er pendelbussen tussen de <strong>crewcamping</strong> en <strong>Backstage West</strong>.',
+    from: 'Do 16 jul, 05:30',
+    to: 'Ma 20 jul, 13:00',
+    extraStops: '&#128652; Extra opstaphaltes bij <strong style="color:var(--text)">Crewparking 2</strong> en <strong style="color:var(--text)">Crewparking 3</strong>',
+    tip: '&#128690; <strong>Neem een fiets mee</strong> als het kan. Dit vermindert de drukte op de bus en je bent sneller op je werklocatie.',
+    img: 'pendelbus-kaart.jpg'
+  },
+
+  crewcamping: {
+    videoUrl: 'https://player.vimeo.com/video/1208824843',
+    intro: 'We overnachten op de crewcamping (bij Backstage Oost). Zoek bij aankomst de andere 3D Events tenten op &#8212; we proberen zoveel mogelijk bij elkaar te staan.',
+    warningTitle: 'LET OP: CREWBAR &amp; ACCREDITATIE ZIJN DIT JAAR BIJ BACKSTAGE WEST',
+    steps: [
+      'Haal je campingbandje op bij de crewcamping (Backstage Oost)',
+      'Zet je tent op op de crewcamping',
+      'Neem de pendelbus naar Backstage West (rijdt 24/7)',
+      'Accrediteer bij ingang West voor toegang tot het terrein',
+      'Dan kun je aan de slag!'
+    ],
+    footnote: '&#128652; Pendelbus rijdt 24 uur per dag van Backstage West naar de crewcamping en terug.'
+  },
+
+  route: {
+    img: 'routekaart.jpg',
+    caption: 'Route vanaf Backstage Roemaat naar o.a. Backstage West en de crewcamping.'
+  },
+
+  workplaces: [
+    {name:'Campingwinkel', desc:'24u supermarkt op de camping. Ontbijt, pizza, koffie en meer.', tag:'CAMPING', img:'img-camping.jpg?v=2'},
+    {name:'Pizza', desc:'Drie vaste Dr. Oetker pizzatenten verspreid over het terrein.', tag:'FESTIVAL', img:'img-pizza.jpg?v=2'},
+    {name:'Unox / Ola', desc:'Unox karren en Ola kramen verspreid over het festivalterrein.', tag:'FESTIVAL', img:'img-festival.jpg?v=2'}
+  ],
+
+  tips: [
+    ['&#128095;','Goede stevige schoenen zijn essentieel. Kies schoenen waar je goed op kan lopen en staan.'],
+    ['&#129393;','Blaarpleisters. Meer dan je denkt nodig te hebben.'],
+    ['&#128267;','Powerbank is essentieel. Laadpunten zijn schaars op het terrein.'],
+    ['&#128167;','Drink voor je shift al genoeg water. Je vergeet het tijdens het werk.'],
+    ['&#128564;','Slaapmasker en oordopjes helpen enorm op de camping. Je slaapt er een stuk beter mee.'],
+    ['&#9201;','Loop je? Reken minimaal 20 minuten in naar je werkplek. Er rijdt ook een pendelbus.'],
+    ['&#127774;','Zonnebrand elke dag opnieuw, ook als het bewolkt lijkt.'],
+    ['&#127820;','Neem een snack mee voor in je werktas voor tijdens je pauze.'],
+    ['&#128179;','Laat je portemonnee in je tent. Neem alleen wat nodig is.'],
+    ['&#128176;','Neem je geld of munten mee naar de werkplek? Geef dit aan bij je leidinggevende.']
+  ],
+
   contacts: [
     {name:'Pepijn de Vos', role:'Contactpersoon personeel 3D', phone:'0619123439'},
     {name:'Anouk van de Luitgaren', role:'Contactpersoon personeel 3D', phone:'0642497514'}
   ],
-  zcAppUrl: 'https://www.zwartecross.nl',
-  videoUrl: 'https://player.vimeo.com/video/1208824843',
-  updates: []
+  crewPointDay: 'Achter Pizza 2',
+  crewPointMorning: 'Witte partytent op de crewcamping',
+
+  arrivalTimes: [
+    ['&#128336;','Meld je <strong>45 minuten</strong> voor je shift op het 3D Events punt op de crewcamping.'],
+    ['&#128694;','Wandeling naar werkplek duurt <strong>minimaal 20 minuten.</strong>'],
+    ['&#128197;','Je rooster ontvang je <strong>een dag van tevoren.</strong>'],
+    ['&#8987;','Wees <strong>15 minuten</strong> voor je shift op de werklocatie. Ben je 30 minuten eerder, dan kun je alvast wat eten.']
+  ],
+
+  pauses: [
+    ['Tot 4 uur','Geen'],
+    ['4 &ndash; 5 uur','15 min'],
+    ['5 &ndash; 8 uur','30 min'],
+    ['8 &ndash; 10 uur','45 min'],
+    ['10 uur +','60 min']
+  ],
+  pauseNote: 'Kan afwijken afhankelijk van de drukte op dat moment.',
+
+  clothingTable: [
+    ['Pizza units','Dr. Oetker shirt + cap'],
+    ['Unox / Ola karretjes','Rode polo'],
+    ['Campingwinkel','T-shirt of polo 3D Events'],
+    ['Festival All-Round','Unox of Ola kleding']
+  ],
+  clothingNote: '&#9728;&#65039; <strong>Bij warm weer:</strong> Een degelijke korte broek mag. <strong>Niet</strong> bij bandovens of bakplaten (pizza productie) &mdash; daar is een lange broek verplicht. Unox kar valt hier niet onder.',
+  clothingWarning: 'Per unit zijn sloven/schorten beschikbaar.',
+  clothingFooter: '&#128095; Altijd stevige schoenen &mdash; <strong style="color:var(--text)">geen sandalen of slippers.</strong><br>&#9888;&#65039; Neem voor de zekerheid altijd je lange broek mee naar de werklocatie.',
+
+  phonePolicy: [
+    {loc:'Unox / Ola Runners', icon:'&#128241;', regel:'Houd je telefoon bij je en aan. Je zit in een WhatsApp groep met je team voor communicatie gedurende de dag.', kleur:'var(--yellow)'},
+    {loc:'Unox / Ola medewerkers', icon:'&#128241;', regel:'Neem je telefoon mee en sluit je oplader aan in de kar. Alleen gebruiken voor werk &#8212; niet voor priv&eacute;.', kleur:'var(--yellow)'},
+    {loc:'Pizza units', icon:'&#128683;', regel:'Telefoon achterlaten bij het oplaadpunt op de werkplek (achter de schermen of in een tas). Niet bij je tijdens het werk.', kleur:'#e04545'},
+    {loc:'Campingwinkel', icon:'&#128683;', regel:'Telefoon achterlaten bij het oplaadpunt op de werkplek. Niet bij je tijdens het werk.', kleur:'#e04545'}
+  ],
+
+  rules: [
+    ['&#128721;','<strong>Geen alcohol</strong> voor of tijdens je dienst. Bij vermoeden word je direct uitgesloten van werkzaamheden.'],
+    ['&#128721;','<strong>Drugs zijn ten allen tijde verboden.</strong> Elk vermoeden van gebruik kan leiden tot direct naar huis gestuurd worden.'],
+    ['&#128721;','<strong>Geen diefstal</strong> of gratis weggeven aan bekenden. Hierop volgt aangifte.'],
+    ['&#128683;','Je werkshirt mag <strong>niet</strong> gedragen worden buiten je dienst op het terrein.'],
+    ['&#128683;','Roken alleen in pauzes, buiten zicht van bezoekers, met toestemming leidinggevende.'],
+    ['&#9989;','Kapot armbandje? Meld bij je leidinggevende &mdash; te wisselen bij de organisatie.'],
+    ['&#9989;','Gratis drinken in de crewcatering &#8212; je passeert die onderweg van Backstage West naar je werkplek. Neem altijd wat mee, ook naar de crewcamping. Zo heb je ook tijdens je dienst en &#39;s avonds op de camping genoeg.']
+  ],
+
+  checklist: {
+    storageKey: 'zc26_cl',
+    categories: [
+      {title:'NIET VERGETEN &#128680;', items:['ID kaart of rijbewijs !!','Telefoon + oplader','Powerbank (groot formaat)','Portemonnee','Klein bedrag cash (crewbar)','SK Kelnersmes','Pen']},
+      {title:'KLEDING &#128085;', items:['2 lange werkbroeken','Veiligheidsschoenen of stevige schoenen','Genoeg ondergoed & sokken','Trui of jas (warm genoeg voor de nacht)','Regenponcho','Zonnebril','Riem','Leuke festivaloutfit(s)','Slaapshirt']},
+      {title:'KAMPEREN &#9978;', items:['Tent + haringen + hamer','Luchtbed + pomp','Slaapzak','Fleece deken','Kussen','Slaapmasker','Oordopjes','Hoofdlamp of zaklamp','Vuilniszak']},
+      {title:'VERZORGING &#129529;', items:['Sneldrogende handdoek','Shampoo + bodywash','Douche slippers','Tandenborstel + pasta','Deodorant','Zonnebrand SPF 30+','Lippenbalsem met SPF','Anti-muggenspul','Vochtige washandjes','Smintjes of kauwgom']},
+      {title:'MEDICATIE &#128138;', items:['Paracetamol','Ibuprofen','Blaarpleisters','Tape','Antihistamine (hooikoorts)','Dextro energytabs']},
+      {title:'ETEN & DRINKEN &#127820;', items:['Waterfles (1L+)','Houdbaar eten (mueslirepen, noten)','Fles water voor naast je slaapzak','Bordje, bestek, beker']},
+      {title:'EXTRA\'S &#127920;', items:['Oortjes / speaker','Speelkaarten','Aansteker','Paraplu','Festivaltasje','Werktas voor naar je werkplek']}
+    ]
+  },
+
+  faq: [
+    ['Wanneer weet ik wanneer ik werk?','Je hoort je rooster een dag van tevoren. Werktijden kunnen licht wijzigen afhankelijk van de drukte &#8212; je hoort dit op locatie.'],
+    ['Waar meld ik me aan bij aankomst?','Bij Pepijn of Anouk. Overdag: achter Pizza 2. \'s Ochtends vroeg: witte partytent op de crewcamping. Kom eerst langs voordat je je dienst start.'],
+    ['Hoe kom ik op het festivalterrein?','Je krijgt een persoonlijk armbandje voor de crewcamping en het festivalterrein. Niet overdraagbaar.'],
+    ['Hoe ver is het naar mijn werkplek?','Minimaal 20 minuten lopen. Meld je 45 minuten voor je shift op het 3D Events punt op de camping.'],
+    ['Krijg ik eten en drinken?','Ja. Ontbijt wordt geregeld op de camping. Gratis drinken in de crewcatering, ook buiten je dienst. Er is eetgelegenheid voor en na je shift.'],
+    ['Mag ik alcohol drinken voor mijn dienst?','Nee. Geen alcohol of drugs voor of tijdens je dienst. Bij het geringste vermoeden word je uitgesloten van werkzaamheden.'],
+    ['Wat als mijn armbandje kapot gaat?','Direct melden bij je leidinggevende. In overleg te wisselen bij de organisatie. Kapot = geen toegang.'],
+    ['Hoe zit het met betaling?','Na afloop van elke dienst teken je voor je uren bij je leidinggevende. Na het festival neem je contact op met je uitzendbureau voor vragen over betaling.'],
+    ['Wat doe ik bij noodgevallen \'s nachts?','Meld het altijd bij je leidinggevende. Die zorgt voor de juiste opvolging.'],
+    ['Mag ik mijn telefoon gebruiken tijdens het werk?','In overleg met je leidinggevende. Niet tijdens klantcontact of drukke momenten.'],
+    ['Waar kan ik douchen?','Op de crewcamping zijn sanitaire voorzieningen uitsluitend voor medewerkers.'],
+    ['Wat trek ik aan op het werk?','Bij warm weer mag een degelijke korte broek. Uitzondering: bij bandovens of bakplaten (pizza productie) is een lange broek verplicht vanwege veiligheid. Unox kar valt hier niet onder. Per unit zijn sloven/schorten beschikbaar. Altijd stevige schoenen &#8212; geen sandalen of slippers. Neem voor de zekerheid altijd je lange broek mee naar de werklocatie.']
+  ]
+
 };
 </script>
-<!-- ════════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════════════════════════ -->
 
 <div class="sticky-top"><header class="hdr">
   <div class="hdr-logo">
     <div class="logo-zc">ZWARTE CROSS</div>
     <div class="logo-divider"></div>
-    <div class="logo-sub">CREW<br>BRIEFING 2026</div>
+    <div class="logo-sub">CREW<br>BRIEFING <span id="hdr-year"></span></div>
   </div>
   <div class="hdr-badge">3D EVENTS</div>
 </header>
@@ -319,154 +503,114 @@ document.querySelectorAll('.tab-btn').forEach(function(btn) {
   });
 });
 
+document.getElementById('hdr-year').textContent = CONTENT.meta.year;
+
 // ── UPDATES ────────────────────────────────────
-if (CONFIG.updates.length > 0) {
+if (CONTENT.updates.length > 0) {
   document.getElementById('updates-wrap').style.display = 'block';
   var ul = document.getElementById('updates-list');
-  CONFIG.updates.forEach(function(u) {
+  CONTENT.updates.forEach(function(u) {
     ul.innerHTML += '<div class="upd-item"><div class="upd-date">'+u.date+'</div><div class="upd-text">'+u.text+'</div></div>';
   });
 }
 
 // ── TAB: INFO ──────────────────────────────────
 (function() {
+  var C = CONTENT;
   var h = '';
+
   h += '<div class="sect">HET EVENEMENT</div>';
   h += '<div class="card-grid">';
-  h += '<div class="card wide"><div class="card-lbl">Evenementdagen</div><div class="card-val">'+CONFIG.eventDates+'</div><div class="card-sub">Crewcamping open: '+CONFIG.campingOpen+'<br>Gastencamping open: Do 16 juli, 10:00 uur<br>Camping sluit: '+CONFIG.campingClose+'</div></div>';
-  h += '<div class="card wide"><div class="card-lbl">Locatie</div><div class="card-val" style="font-size:17px">'+CONFIG.address+'</div><div class="card-sub">Festivalterrein de Schans &mdash; Lichtenvoorde</div></div>';
+  h += '<div class="card wide"><div class="card-lbl">Evenementdagen</div><div class="card-val">'+C.event.eventDates+'</div><div class="card-sub">Crewcamping open: '+C.event.campingOpen+'<br>Gastencamping open: '+C.event.guestCampingOpen+'<br>Camping sluit: '+C.event.campingClose+'</div></div>';
+  h += '<div class="card wide"><div class="card-lbl">Locatie</div><div class="card-val" style="font-size:17px">'+C.event.address+'</div><div class="card-sub">'+C.event.addressSub+'</div></div>';
   h += '</div>';
 
   h += '<div class="sect">FACTS &amp; FIGURES</div>';
   h += '<div class="card-grid" style="margin-bottom:10px">';
-  h += '<div class="card"><div class="card-lbl">Editie</div><div class="card-val">15<span style="font-size:16px;color:var(--muted)">e jaar</span></div><div class="card-sub">Zwarte Cross sinds 1997</div></div>';
-  h += '<div class="card"><div class="card-lbl">Bezoekers 2025</div><div class="card-val">277<span style="font-size:16px;color:var(--muted)">k</span></div><div class="card-sub">Groeit elk jaar</div></div>';
-  h += '<div class="card"><div class="card-lbl">Per dag gemiddeld</div><div class="card-val">73<span style="font-size:16px;color:var(--muted)">.500</span></div><div class="card-sub">52% dagbezoeker &middot; 48% camping</div></div>';
-  h += '<div class="card"><div class="card-lbl">Pizza slices 2025</div><div class="card-val">110<span style="font-size:16px;color:var(--muted)">k+</span></div><div class="card-sub">Op 4 locaties verkocht</div></div>';
-  h += '<div class="card"><div class="card-lbl">Herkomst</div><div class="card-val">98<span style="font-size:16px;color:var(--muted)">%</span></div><div class="card-sub">Uit Nederland &middot; 37% Gelderland</div></div>';
-  h += '<div class="card"><div class="card-lbl">Uitverkocht</div><div class="card-val" style="color:var(--orange);font-size:18px">Sinds 2016</div><div class="card-sub">Dit jaar 5% minder bezoekers gepland</div></div>';
+  C.facts.forEach(function(f) {
+    var val = f.valText ? '<span style="color:var(--orange);font-size:18px">'+f.valText+'</span>' : f.big+'<span style="font-size:16px;color:var(--muted)">'+f.small+'</span>';
+    h += '<div class="card"><div class="card-lbl">'+f.lbl+'</div><div class="card-val">'+val+'</div><div class="card-sub">'+f.sub+'</div></div>';
+  });
   h += '</div>';
 
   h += '<div class="sect">OPENINGSTIJDEN</div>';
   h += '<div class="card-grid" style="margin-bottom:10px">';
-  h += '<div class="card card-yellow"><div class="card-lbl">Donderdag 16 juli</div><div class="card-val" style="font-size:16px">15:00 &ndash; 02:30</div><div class="card-sub">Camping open vanaf 08:00. Crossbaan opent later.</div></div>';
-  h += '<div class="card card-yellow"><div class="card-lbl">Vrijdag 17 juli</div><div class="card-val" style="font-size:16px">10:00 &ndash; 01:00</div><div class="card-sub">&nbsp;</div></div>';
-  h += '<div class="card card-yellow"><div class="card-lbl">Zaterdag 18 juli</div><div class="card-val" style="font-size:16px">10:00 &ndash; 01:00</div><div class="card-sub">Drukste dag van het festival</div></div>';
-  h += '<div class="card wide card-yellow"><div class="card-lbl">Zondag 19 juli</div><div class="card-val" style="font-size:16px">Wisselend per area</div><div class="card-sub">Mainstage + Theaterweide tot 23:30 &middot; Festivalterrein 2 tot 21:45 &middot; Megatent tot 24:00</div></div>';
+  C.hours.forEach(function(d) {
+    h += '<div class="card'+(d.wide?' wide':'')+' card-yellow"><div class="card-lbl">'+d.day+'</div><div class="card-val" style="font-size:16px">'+d.time+'</div><div class="card-sub">'+d.sub+'</div></div>';
+  });
   h += '</div>';
 
   h += '<div class="sect">SOCIALE AGENDA</div>';
-  h += '<div class="card wide" style="border-left:3px solid var(--orange);margin-bottom:10px"><div class="card-lbl">&#127789; PERSONEELS BBQ</div><div class="card-val" style="font-size:18px">Woensdagavond 19:00 uur</div><div class="card-sub">Locatie: bij de campingwinkel. Voor wie woensdag werkt of donderdag vroeg begint. Goede start van het festival samen!</div></div>';
+  h += '<div class="card wide" style="border-left:3px solid var(--orange);margin-bottom:10px"><div class="card-lbl">'+C.bbq.title+'</div><div class="card-val" style="font-size:18px">'+C.bbq.time+'</div><div class="card-sub">'+C.bbq.desc+'</div></div>';
 
   h += '<div class="sect">VERVOER NAAR HET TERREIN</div>';
   h += '<div class="transport-grid">';
-
-  // StudentKelner
-  h += '<div class="transport-item" id="tr-sk">';
-  h += '<button class="transport-btn" data-transport="tr-sk">';
-  h += '<div><div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:3px">Jouw partij</div><div class="transport-name">StudentKelner</div></div>';
-  h += '<span class="transport-arrow">&#8964;</span></button>';
-  h += '<div class="transport-body">';
-  h += '<div class="bus-card" style="border-radius:0;margin:0"><div class="bus-icon">&#128652;</div><div class="bus-info"><div class="bus-lbl">Heenreis &mdash; donderdag 16 juli</div><div class="bus-val">'+CONFIG.busInfo+'</div><div class="bus-sub">Opstap: '+CONFIG.busLocation+'</div></div></div>';
-  h += '<div class="bus-card" style="background:#2a2200;border:1px solid #c8a200;border-bottom-width:3px;border-radius:0;margin:0"><div class="bus-icon">&#128652;</div><div class="bus-info"><div class="bus-lbl">Terugreis &mdash; maandag 20 juli</div><div class="bus-val">12:00 uur</div><div class="bus-sub">Ophalen: Huttendijk 12, crewcamping</div></div></div>';
-  h += '</div></div>';
-
-  // MF Horeca
-  h += '<div class="transport-item" id="tr-mf">';
-  h += '<button class="transport-btn" data-transport="tr-mf">';
-  h += '<div><div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:3px">Jouw partij</div><div class="transport-name">MF Horeca</div></div>';
-  h += '<span class="transport-arrow">&#8964;</span></button>';
-  h += '<div class="transport-body" style="padding:14px 16px">';
-  h += '<div style="font-size:13px;line-height:1.6;color:var(--text)">';
-  h += '<strong>Heenreis</strong><br>Bus vanuit Groningen, vertrek <strong>08:00 uur</strong> vanaf het afgesproken punt.<br><br>';
-  h += '<strong>Vragen?</strong> Neem contact op met het kantoor van MF Horeca of Merlyn.';
-  h += '</div></div></div>';
-
-  // FestiSquad
-  h += '<div class="transport-item" id="tr-fs">';
-  h += '<button class="transport-btn" data-transport="tr-fs">';
-  h += '<div><div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:3px">Jouw partij</div><div class="transport-name">FestiSquad</div></div>';
-  h += '<span class="transport-arrow">&#8964;</span></button>';
-  h += '<div class="transport-body" style="padding:14px 16px">';
-  h += '<div style="font-size:13px;line-height:1.6;color:var(--text)">';
-  h += 'Houd de vervoersplanning aan zoals deze gecommuniceerd is vanuit het kantoor van FestiSquad.<br><br>';
-  h += '<strong>Vragen?</strong> Neem contact op met het kantoor van FestiSquad of Jordi Stet.';
-  h += '</div></div></div>';
-
+  C.transport.forEach(function(t) {
+    h += '<div class="transport-item" id="'+t.id+'">';
+    h += '<button class="transport-btn" data-transport="'+t.id+'">';
+    h += '<div><div style="font-size:9px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:3px">Jouw partij</div><div class="transport-name">'+t.name+'</div></div>';
+    h += '<span class="transport-arrow">&#8964;</span></button>';
+    if (t.type === 'bus') {
+      h += '<div class="transport-body">';
+      h += '<div class="bus-card" style="border-radius:0;margin:0"><div class="bus-icon">&#128652;</div><div class="bus-info"><div class="bus-lbl">'+t.outbound.label+'</div><div class="bus-val">'+t.outbound.time+'</div><div class="bus-sub">'+t.outbound.sub+'</div></div></div>';
+      h += '<div class="bus-card" style="background:#2a2200;border:1px solid #c8a200;border-bottom-width:3px;border-radius:0;margin:0"><div class="bus-icon">&#128652;</div><div class="bus-info"><div class="bus-lbl">'+t.inbound.label+'</div><div class="bus-val">'+t.inbound.time+'</div><div class="bus-sub">'+t.inbound.sub+'</div></div></div>';
+      h += '</div>';
+    } else {
+      h += '<div class="transport-body" style="padding:14px 16px"><div style="font-size:13px;line-height:1.6;color:var(--text)">'+t.html+'</div></div>';
+    }
+    h += '</div>';
+  });
   h += '</div>';
 
-  ttps://www.zwartecross.nl/programma" target="_blank" style="color:var(--orange)">Bekijk ook online &rarr;</a></div>';
-  h += '<div class="card wide" style="margin-bottom:10px"><div class="card-lbl">&#127978; ZWARTE CROSS APP</div><div style="font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.5">Programma, blokkenschema en plattegrond. Download v&oacute;&oacute;r het festival.</div><div style="display:flex;gap:10px;flex-wrap:wrap"><a href="https://apps.apple.com/nl/app/zwarte-cross/id1317710154" target="_blank" style="flex:1;min-width:130px;display:flex;align-items:center;gap:10px;background:#000;border:1px solid #333;border-radius:8px;padding:10px 14px;text-decoration:none"><span style="font-size:26px">&#63743;</span><div><div style="font-size:9px;color:#aaa;letter-spacing:.05em;text-transform:uppercase">Download in de</div><div style="font-size:15px;font-weight:700;color:#fff;font-family:var(--display);letter-spacing:.5px">App Store</div></div></a><a href="https://play.google.com/store/apps/details?id=com.appmiral.zwartecross" target="_blank" style="flex:1;min-width:130px;display:flex;align-items:center;gap:10px;background:#000;border:1px solid #333;border-radius:8px;padding:10px 14px;text-decoration:none"><span style="font-size:26px">&#9654;</span><div><div style="font-size:9px;color:#aaa;letter-spacing:.05em;text-transform:uppercase">Beschikbaar op</div><div style="font-size:15px;font-weight:700;color:#fff;font-family:var(--display);letter-spacing:.5px">Google Play</div></div></a></div></div>';
-    h += '<div class="sect">PENDELBUS</div>';
-  h += '<div class="card wide" style="margin-bottom:10px"><div class="card-lbl">&#128652; Pendeldienst showdagen</div>'
-    + '<div style="font-size:13px;color:var(--text);line-height:1.6;margin-bottom:12px">'
-    + 'Tijdens de showdagen rijden er pendelbussen tussen de <strong>crewcamping</strong> en <strong>Backstage West</strong>.'
-    + '</div>'
+  h += '<div class="sect">ZC APP &amp; PROGRAMMA</div>';
+  h += '<div class="alert info-sm">Het blokkenschema in de ZC app is handig om te weten wat er speelt op je werkplek &#8212; zo weet je wanneer het druk wordt. <a href="'+C.meta.zcAppUrl+'/programma" target="_blank" style="color:var(--orange)">Bekijk ook online &rarr;</a></div>';
+  h += '<div class="card wide" style="margin-bottom:10px"><div class="card-lbl">'+C.app.title+'</div><div style="font-size:13px;color:var(--muted);margin-bottom:12px;line-height:1.5">'+C.app.desc+'</div><div style="display:flex;gap:10px;flex-wrap:wrap"><a href="'+C.app.appStoreUrl+'" target="_blank" style="flex:1;min-width:130px;display:flex;align-items:center;gap:10px;background:#000;border:1px solid #333;border-radius:8px;padding:10px 14px;text-decoration:none"><span style="font-size:26px">&#63743;</span><div><div style="font-size:9px;color:#aaa;letter-spacing:.05em;text-transform:uppercase">Download in de</div><div style="font-size:15px;font-weight:700;color:#fff;font-family:var(--display);letter-spacing:.5px">App Store</div></div></a><a href="'+C.app.playStoreUrl+'" target="_blank" style="flex:1;min-width:130px;display:flex;align-items:center;gap:10px;background:#000;border:1px solid #333;border-radius:8px;padding:10px 14px;text-decoration:none"><span style="font-size:26px">&#9654;</span><div><div style="font-size:9px;color:#aaa;letter-spacing:.05em;text-transform:uppercase">Beschikbaar op</div><div style="font-size:15px;font-weight:700;color:#fff;font-family:var(--display);letter-spacing:.5px">Google Play</div></div></a></div></div>';
+
+  h += '<div class="sect">PENDELBUS</div>';
+  h += '<div class="card wide" style="margin-bottom:10px"><div class="card-lbl">'+C.pendelbus.title+'</div>'
+    + '<div style="font-size:13px;color:var(--text);line-height:1.6;margin-bottom:12px">'+C.pendelbus.intro+'</div>'
     + '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px">'
-    + '<div style="background:var(--surf2);border-radius:6px;padding:10px 12px"><div style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:3px">Van</div><div style="font-family:var(--display);font-size:16px;letter-spacing:.5px">Do 16 jul, 05:30</div></div>'
-    + '<div style="background:var(--surf2);border-radius:6px;padding:10px 12px"><div style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:3px">Tot</div><div style="font-family:var(--display);font-size:16px;letter-spacing:.5px">Ma 20 jul, 13:00</div></div>'
+    + '<div style="background:var(--surf2);border-radius:6px;padding:10px 12px"><div style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:3px">Van</div><div style="font-family:var(--display);font-size:16px;letter-spacing:.5px">'+C.pendelbus.from+'</div></div>'
+    + '<div style="background:var(--surf2);border-radius:6px;padding:10px 12px"><div style="font-size:10px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:3px">Tot</div><div style="font-family:var(--display);font-size:16px;letter-spacing:.5px">'+C.pendelbus.to+'</div></div>'
     + '</div>'
-    + '<div style="font-size:13px;color:var(--muted);margin-bottom:6px">&#128652; Extra opstaphaltes bij <strong style="color:var(--text)">Crewparking 2</strong> en <strong style="color:var(--text)">Crewparking 3</strong></div>'
-    + '<div style="background:rgba(255,210,0,.08);border:1px solid rgba(255,210,0,.2);border-radius:6px;padding:10px 12px;font-size:13px;color:var(--text);margin-bottom:12px">&#128690; <strong>Neem een fiets mee</strong> als het kan. Dit vermindert de drukte op de bus en je bent sneller op je werklocatie.</div>'
-    + '<img src="pendelbus-kaart.jpg" style="width:100%;border-radius:6px;margin-top:4px" alt="Pendelbusroute kaart">'
+    + '<div style="font-size:13px;color:var(--muted);margin-bottom:6px">'+C.pendelbus.extraStops+'</div>'
+    + '<div style="background:rgba(255,210,0,.08);border:1px solid rgba(255,210,0,.2);border-radius:6px;padding:10px 12px;font-size:13px;color:var(--text);margin-bottom:12px">'+C.pendelbus.tip+'</div>'
+    + '<img src="'+C.pendelbus.img+'" style="width:100%;border-radius:6px;margin-top:4px" alt="Pendelbusroute kaart">'
     + '</div>';
 
   h += '<div class="sect">CREWCAMPING</div>';
-  if (CONFIG.videoUrl) {
-    h += '<div class="video-wrap"><iframe src="'+CONFIG.videoUrl+'" allowfullscreen allow="autoplay"></iframe></div>';
+  if (C.crewcamping.videoUrl) {
+    h += '<div class="video-wrap"><iframe src="'+C.crewcamping.videoUrl+'" allowfullscreen allow="autoplay"></iframe></div>';
   } else {
     h += '<div class="video-wrap"><div class="video-ph"><span>&#127909;</span><p>Video volgt binnenkort</p></div></div>';
   }
-  h += '<p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:10px">We overnachten op de crewcamping (bij Backstage Oost). Zoek bij aankomst de andere 3D Events tenten op &#8212; we proberen zoveel mogelijk bij elkaar te staan.</p>';
+  h += '<p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:10px">'+C.crewcamping.intro+'</p>';
 
-  h += '<div style="background:rgba(232,80,10,.1);border:1px solid rgba(232,80,10,.3);border-radius:var(--radius);padding:14px;margin-bottom:10px">';
-  h += '<div style="font-family:var(--display);font-size:13px;letter-spacing:1px;color:var(--orange);margin-bottom:10px">LET OP: CREWBAR &amp; ACCREDITATIE ZIJN DIT JAAR BIJ BACKSTAGE WEST</div>';
+  h += '<div style="background:rgba(232,80,10,.1);border:1px solid rgba(232,80,10,.3);border-radius:var(--r);padding:14px;margin-bottom:10px">';
+  h += '<div style="font-family:var(--display);font-size:13px;letter-spacing:1px;color:var(--orange);margin-bottom:10px">'+C.crewcamping.warningTitle+'</div>';
   h += '<div style="display:flex;flex-direction:column;gap:8px">';
-  var steps = [
-    ['1','Haal je campingbandje op bij de crewcamping (Backstage Oost)'],
-    ['2','Zet je tent op op de crewcamping'],
-    ['3','Neem de pendelbus naar Backstage West (rijdt 24/7)'],
-    ['4','Accrediteer bij ingang West voor toegang tot het terrein'],
-    ['5','Dan kun je aan de slag!']
-  ];
-  steps.forEach(function(s) {
+  C.crewcamping.steps.forEach(function(s, i) {
     h += '<div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--text)">';
-    h += '<span style="background:var(--orange);color:#fff;font-family:var(--display);font-size:14px;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">'+s[0]+'</span>';
-    h += '<span style="padding-top:2px">'+s[1]+'</span></div>';
+    h += '<span style="background:var(--orange);color:#fff;font-family:var(--display);font-size:14px;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">'+(i+1)+'</span>';
+    h += '<span style="padding-top:2px">'+s+'</span></div>';
   });
   h += '</div>';
-  h += '<div style="font-size:11px;color:var(--muted);margin-top:10px">&#128652; Pendelbus rijdt 24 uur per dag van Backstage West naar de crewcamping en terug.</div>';
+  h += '<div style="font-size:11px;color:var(--muted);margin-top:10px">'+C.crewcamping.footnote+'</div>';
   h += '</div>';
+
   h += '<div class="sect">ROUTEBESCHRIJVING TERREIN</div>';
-  h += '<img src="routekaart.jpg" style="width:100%;border-radius:var(--radius);margin-bottom:4px" alt="Routebeschrijving Zwarte Cross terrein">';
-  h += '<p style="font-size:12px;color:var(--muted);margin-bottom:4px">Route vanaf Backstage Roemaat naar o.a. Backstage West en de crewcamping.</p>';
+  h += '<img src="'+C.route.img+'" style="width:100%;border-radius:var(--r);margin-bottom:4px" alt="Routebeschrijving Zwarte Cross terrein">';
+  h += '<p style="font-size:12px;color:var(--muted);margin-bottom:4px">'+C.route.caption+'</p>';
 
   h += '<div class="sect">WERKPLEKKEN</div>';
-  var locs = [
-    {name:'Campingwinkel', desc:'24u supermarkt op de camping. Ontbijt, pizza, koffie en meer.', tag:'CAMPING', img:'img-camping.jpg?v=2'},
-    {name:'Pizza', desc:'Drie vaste Dr. Oetker pizzatenten verspreid over het terrein.', tag:'FESTIVAL', img:'img-pizza.jpg?v=2'},
-    {name:'Unox / Ola', desc:'Unox karren en Ola kramen verspreid over het festivalterrein.', tag:'FESTIVAL', img:'img-festival.jpg?v=2'}
-  ];
   h += '<div class="loc-grid">';
-  locs.forEach(function(l) {
+  C.workplaces.forEach(function(l) {
     h += '<div class="loc-card"><img src="'+l.img+'" style="width:100%;aspect-ratio:16/9;object-fit:cover;display:block" alt="'+l.name+'"><div class="loc-body"><div class="loc-name">'+l.name+'</div><div class="loc-desc">'+l.desc+'</div><span class="loc-tag">'+l.tag+'</span></div></div>';
   });
   h += '</div>';
 
   h += '<div class="sect">TIPS & TRICKS</div>';
-  var tips = [
-    ['&#128095;','Goede stevige schoenen zijn essentieel. Kies schoenen waar je goed op kan lopen en staan.'],
-    ['&#129393;','Blaarpleisters. Meer dan je denkt nodig te hebben.'],
-    ['&#128267;','Powerbank is essentieel. Laadpunten zijn schaars op het terrein.'],
-    ['&#128167;','Drink voor je shift al genoeg water. Je vergeet het tijdens het werk.'],
-    ['&#128564;','Slaapmasker en oordopjes helpen enorm op de camping. Je slaapt er een stuk beter mee.'],
-    ['&#9201;','Loop je? Reken minimaal 20 minuten in naar je werkplek. Er rijdt ook een pendelbus.'],
-    ['&#127774;','Zonnebrand elke dag opnieuw, ook als het bewolkt lijkt.'],
-    ['&#127820;','Neem een snack mee voor in je werktas voor tijdens je pauze.'],
-    ['&#128179;','Laat je portemonnee in je tent. Neem alleen wat nodig is.'],
-    ['&#128176;','Neem je geld of munten mee naar de werkplek? Geef dit aan bij je leidinggevende.']
-  ];
-  tips.forEach(function(t) {
+  C.tips.forEach(function(t) {
     h += '<div class="tip-item"><div class="tip-ico">'+t[0]+'</div><div>'+t[1]+'</div></div>';
   });
 
@@ -475,61 +619,46 @@ if (CONFIG.updates.length > 0) {
 
 // ── TAB: OP HET WERK ───────────────────────────
 (function() {
+  var C = CONTENT;
   var h = '';
+
   h += '<div class="sect">JOUW AANSPREEKPUNTEN</div>';
-  CONFIG.contacts.forEach(function(ct) {
+  C.contacts.forEach(function(ct) {
     var tel = '+31' + ct.phone.replace(/^0/,'');
     h += '<div class="contact-card"><div><div class="ct-name">'+ct.name+'</div><div class="ct-role">'+ct.role+'</div></div>';
     h += '<div class="ct-btns"><a class="ct-btn call" href="tel:'+tel+'">&#128222;</a><a class="ct-btn wa" href="https://wa.me/'+tel.replace('+','')+'">&#128172;</a></div></div>';
   });
-  h += '<div class="cp-note">Overdag: <strong style="color:var(--text)">'+CONFIG.crewPointDay+'</strong><br>\'s Ochtends vroeg: <strong style="color:var(--text)">'+CONFIG.crewPointMorning+'</strong><br>\'s Nachts alleen bij noodgevallen &mdash; app Pepijn, hij belt terug.</div>';
+  h += '<div class="cp-note">Overdag: <strong style="color:var(--text)">'+C.crewPointDay+'</strong><br>\'s Ochtends vroeg: <strong style="color:var(--text)">'+C.crewPointMorning+'</strong><br>\'s Nachts alleen bij noodgevallen &mdash; app Pepijn, hij belt terug.</div>';
 
   h += '<div class="sect">AANKOMST & TIJDEN</div>';
-  var times = [
-    ['&#128336;','Meld je <strong>45 minuten</strong> voor je shift op het 3D Events punt op de crewcamping.'],
-    ['&#128694;','Wandeling naar werkplek duurt <strong>minimaal 20 minuten.</strong>'],
-    ['&#128197;','Je rooster ontvang je <strong>een dag van tevoren.</strong>'],
-    ['&#8987;','Wees <strong>15 minuten</strong> voor je shift op de werklocatie. Ben je 30 minuten eerder, dan kun je alvast wat eten.']
-  ];
-  times.forEach(function(t) {
+  C.arrivalTimes.forEach(function(t) {
     h += '<div class="rule-item"><div class="rule-ico">'+t[0]+'</div><div>'+t[1]+'</div></div>';
   });
 
   h += '<div class="sect">PAUZES (RICHTLIJN)</div>';
   h += '<div class="pause-grid">';
-  [['Tot 4 uur','Geen'],['4 &ndash; 5 uur','15 min'],['5 &ndash; 8 uur','30 min'],['8 &ndash; 10 uur','45 min'],['10 uur +','60 min']].forEach(function(p) {
+  C.pauses.forEach(function(p) {
     h += '<div class="pause-item"><span class="pause-dur">'+p[0]+'</span><span class="pause-val">'+p[1]+'</span></div>';
   });
-  h += '</div><p style="font-size:12px;color:var(--muted);margin-bottom:16px">Kan afwijken afhankelijk van de drukte op dat moment.</p>';
+  h += '</div><p style="font-size:12px;color:var(--muted);margin-bottom:16px">'+C.pauseNote+'</p>';
 
   h += '<div class="sect">KLEDING PER WERKPLEK</div>';
   h += '<table class="kl-table"><thead><tr><th>Werkplek</th><th>Kleding</th></tr></thead><tbody>';
-  [['Pizza units','Dr. Oetker shirt + cap'],['Unox / Ola karretjes','Rode polo'],['Campingwinkel','T-shirt of polo 3D Events'],['Festival All-Round','Unox of Ola kleding']].forEach(function(k) {
+  C.clothingTable.forEach(function(k) {
     h += '<tr><td><strong>'+k[0]+'</strong></td><td>'+k[1]+'</td></tr>';
   });
-  h += '</tbody></table><div style="background:var(--surf);border:1px solid var(--border2);border-radius:var(--radius);padding:14px;margin-bottom:16px;font-size:13px;line-height:1.6">' + '&#9728;&#65039; <strong>Bij warm weer:</strong> Een degelijke korte broek mag. ' + '<strong>Niet</strong> bij bandovens of bakplaten (pizza productie) &mdash; daar is een lange broek verplicht. Unox kar valt hier niet onder.' + '<div style="background:rgba(232,80,10,.1);border-left:3px solid var(--orange);padding:8px 12px;border-radius:3px;margin:8px 0;color:var(--text)">' + 'Per unit zijn sloven/schorten beschikbaar.</div>' + '<div style="color:var(--muted)">&#128095; Altijd stevige schoenen &mdash; <strong style="color:var(--text)">geen sandalen of slippers.</strong><br>' + '&#9888;&#65039; Neem voor de zekerheid altijd je lange broek mee naar de werklocatie.</div></div>';
+  h += '</tbody></table><div style="background:var(--surf);border:1px solid var(--border2);border-radius:var(--r);padding:14px;margin-bottom:16px;font-size:13px;line-height:1.6">'
+    + C.clothingNote
+    + '<div style="background:rgba(232,80,10,.1);border-left:3px solid var(--orange);padding:8px 12px;border-radius:3px;margin:8px 0;color:var(--text)">' + C.clothingWarning + '</div>'
+    + '<div style="color:var(--muted)">' + C.clothingFooter + '</div></div>';
 
   h += '<div class="sect">TELEFOON PER WERKPLEK</div>';
-  var telefoon = [
-    {loc:'Unox / Ola Runners', icon:'&#128241;', regel:'Houd je telefoon bij je en aan. Je zit in een WhatsApp groep met je team voor communicatie gedurende de dag.', kleur:'var(--yellow)'},
-    {loc:'Unox / Ola medewerkers', icon:'&#128241;', regel:'Neem je telefoon mee en sluit je oplader aan in de kar. Alleen gebruiken voor werk &#8212; niet voor privé.', kleur:'var(--yellow)'},
-    {loc:'Pizza units', icon:'&#128683;', regel:'Telefoon achterlaten bij het oplaadpunt op de werkplek (achter de schermen of in een tas). Niet bij je tijdens het werk.', kleur:'#e04545'},
-    {loc:'Campingwinkel', icon:'&#128683;', regel:'Telefoon achterlaten bij het oplaadpunt op de werkplek. Niet bij je tijdens het werk.', kleur:'#e04545'}
-  ];
-  telefoon.forEach(function(t) {
+  C.phonePolicy.forEach(function(t) {
     h += '<div class="rule-item" style="border-left:3px solid '+t.kleur+';margin-bottom:6px"><div class="rule-ico">'+t.icon+'</div><div><strong>'+t.loc+'</strong><br><span style="font-size:13px;color:var(--muted)">'+t.regel+'</span></div></div>';
   });
+
   h += '<div class="sect">HUISREGELS</div>';
-  var rules = [
-    ['&#128721;','<strong>Geen alcohol</strong> voor of tijdens je dienst. Bij vermoeden word je direct uitgesloten van werkzaamheden.'],
-    ['&#128721;','<strong>Drugs zijn ten allen tijde verboden.</strong> Elk vermoeden van gebruik kan leiden tot direct naar huis gestuurd worden.'],
-    ['&#128721;','<strong>Geen diefstal</strong> of gratis weggeven aan bekenden. Hierop volgt aangifte.'],
-    ['&#128683;','Je werkshirt mag <strong>niet</strong> gedragen worden buiten je dienst op het terrein.'],
-    ['&#128683;','Roken alleen in pauzes, buiten zicht van bezoekers, met toestemming leidinggevende.'],
-    ['&#9989;','Kapot armbandje? Meld bij je leidinggevende &mdash; te wisselen bij de organisatie.'],
-    ['&#9989;','Gratis drinken in de crewcatering &#8212; je passeert die onderweg van Backstage West naar je werkplek. Neem altijd wat mee, ook naar de crewcamping. Zo heb je ook tijdens je dienst en &#39;s avonds op de camping genoeg.']
-  ];
-  rules.forEach(function(r) {
+  C.rules.forEach(function(r) {
     h += '<div class="rule-item"><div class="rule-ico">'+r[0]+'</div><div>'+r[1]+'</div></div>';
   });
 
@@ -537,21 +666,12 @@ if (CONFIG.updates.length > 0) {
 })();
 
 // ── TAB: PAKLIJST ──────────────────────────────
-var CHECKS = {
-  'NIET VERGETEN &#128680;': ['ID kaart of rijbewijs !!','Telefoon + oplader','Powerbank (groot formaat)','Portemonnee','Klein bedrag cash (crewbar)','SK Kelnersmes','Pen'],
-  'KLEDING &#128085;': ['2 lange werkbroeken','Veiligheidsschoenen of stevige schoenen','Genoeg ondergoed & sokken','Trui of jas (warm genoeg voor de nacht)','Regenponcho','Zonnebril','Riem','Leuke festivaloutfit(s)','Slaapshirt'],
-  'KAMPEREN &#9978;': ['Tent + haringen + hamer','Luchtbed + pomp','Slaapzak','Fleece deken','Kussen','Slaapmasker','Oordopjes','Hoofdlamp of zaklamp','Vuilniszak'],
-  'VERZORGING &#129529;': ['Sneldrogende handdoek','Shampoo + bodywash','Douche slippers','Tandenborstel + pasta','Deodorant','Zonnebrand SPF 30+','Lippenbalsem met SPF','Anti-muggenspul','Vochtige washandjes','Smintjes of kauwgom'],
-  'MEDICATIE &#128138;': ['Paracetamol','Ibuprofen','Blaarpleisters','Tape','Antihistamine (hooikoorts)','Dextro energytabs'],
-  'ETEN & DRINKEN &#127820;': ['Waterfles (1L+)','Houdbaar eten (mueslirepen, noten)','Fles water voor naast je slaapzak','Bordje, bestek, beker'],
-  'EXTRA\'S &#127920;': ['Oortjes / speaker','Speelkaarten','Aansteker','Paraplu','Festivaltasje','Werktas voor naar je werkplek']
-};
-
+var CL = CONTENT.checklist;
 var stored = {};
-try { stored = JSON.parse(localStorage.getItem('zc26_cl') || '{}'); } catch(e) {}
+try { stored = JSON.parse(localStorage.getItem(CL.storageKey) || '{}'); } catch(e) {}
 
 function saveAndRender() {
-  try { localStorage.setItem('zc26_cl', JSON.stringify(stored)); } catch(e) {}
+  try { localStorage.setItem(CL.storageKey, JSON.stringify(stored)); } catch(e) {}
   renderCL();
 }
 
@@ -574,7 +694,7 @@ document.addEventListener('click', function(e) {
 
 function renderCL() {
   var total = 0, done = 0;
-  Object.values(CHECKS).forEach(function(items) { total += items.length; });
+  CL.categories.forEach(function(cat) { total += cat.items.length; });
   Object.keys(stored).forEach(function(k) { if (stored[k]) done++; });
   var pct = total > 0 ? Math.round(done/total*100) : 0;
   var isDone = done === total && total > 0;
@@ -584,10 +704,9 @@ function renderCL() {
   h += '<div class="progress-bg"><div class="progress-fill" style="width:'+pct+'%"></div></div>';
   h += '<div class="progress-msg">'+(isDone?'&#10003; Alles ingepakt!':'')+'</div></div>';
 
-  Object.entries(CHECKS).forEach(function(entry, ci) {
-    var cat = entry[0], items = entry[1];
-    h += '<div class="cl-cat"><div class="cl-cat-title">'+cat+'</div>';
-    items.forEach(function(item, ii) {
+  CL.categories.forEach(function(cat, ci) {
+    h += '<div class="cl-cat"><div class="cl-cat-title">'+cat.title+'</div>';
+    cat.items.forEach(function(item, ii) {
       var key = 'i_'+ci+'_'+ii;
       var isDone = !!stored[key];
       h += '<div class="cl-item'+(isDone?' done':'')+'" data-key="'+key+'">';
@@ -624,22 +743,8 @@ window.addEventListener('scroll', function() {
 
 // ── TAB: FAQ ───────────────────────────────────
 (function() {
-  var faqs = [
-    ['Wanneer weet ik wanneer ik werk?','Je hoort je rooster een dag van tevoren. Werktijden kunnen licht wijzigen afhankelijk van de drukte — je hoort dit op locatie.'],
-    ['Waar meld ik me aan bij aankomst?','Bij Pepijn of Anouk. Overdag: achter Pizza 2. \'s Ochtends vroeg: witte partytent op de crewcamping. Kom eerst langs voordat je je dienst start.'],
-    ['Hoe kom ik op het festivalterrein?','Je krijgt een persoonlijk armbandje voor de crewcamping en het festivalterrein. Niet overdraagbaar.'],
-    ['Hoe ver is het naar mijn werkplek?','Minimaal 20 minuten lopen. Meld je 45 minuten voor je shift op het 3D Events punt op de camping.'],
-    ['Krijg ik eten en drinken?','Ja. Ontbijt wordt geregeld op de camping. Gratis drinken in de crewcatering, ook buiten je dienst. Er is eetgelegenheid voor en na je shift.'],
-    ['Mag ik alcohol drinken voor mijn dienst?','Nee. Geen alcohol of drugs voor of tijdens je dienst. Bij het geringste vermoeden word je uitgesloten van werkzaamheden.'],
-    ['Wat als mijn armbandje kapot gaat?','Direct melden bij je leidinggevende. In overleg te wisselen bij de organisatie. Kapot = geen toegang.'],
-    ['Hoe zit het met betaling?','Na afloop van elke dienst teken je voor je uren bij je leidinggevende. Na het festival neem je contact op met je uitzendbureau voor vragen over betaling.'],
-    ['Wat doe ik bij noodgevallen \'s nachts?','Meld het altijd bij je leidinggevende. Die zorgt voor de juiste opvolging.'],
-    ['Mag ik mijn telefoon gebruiken tijdens het werk?','In overleg met je leidinggevende. Niet tijdens klantcontact of drukke momenten.'],
-    ['Waar kan ik douchen?','Op de crewcamping zijn sanitaire voorzieningen uitsluitend voor medewerkers.'],
-    ['Wat trek ik aan op het werk?','Bij warm weer mag een degelijke korte broek. Uitzondering: bij bandovens of bakplaten (pizza productie) is een lange broek verplicht vanwege veiligheid. Unox kar valt hier niet onder. Per unit zijn sloven/schorten beschikbaar. Altijd stevige schoenen &#8212; geen sandalen of slippers. Neem voor de zekerheid altijd je lange broek mee naar de werklocatie.']
-  ];
   var h = '';
-  faqs.forEach(function(faq, i) {
+  CONTENT.faq.forEach(function(faq, i) {
     h += '<div class="faq-item" id="fi'+i+'"><div class="faq-q" data-faq="'+i+'"><span>'+faq[0]+'</span><span class="faq-arrow">&#8964;</span></div><div class="faq-a">'+faq[1]+'</div></div>';
   });
   document.getElementById('p-faq').innerHTML = h;
@@ -651,7 +756,6 @@ document.addEventListener('click', function(e) {
   var i = q.getAttribute('data-faq');
   document.getElementById('fi'+i).classList.toggle('open');
 });
-
 
 function toggleTransport(id) {
   var el = document.getElementById(id);
@@ -668,6 +772,14 @@ document.addEventListener('click', function(e) {
 });
 </script>
 
-<a class="wa-fab" href="https://wa.me/31620316979?text=Hoi%20Pepijn%2C%20ik%20heb%20een%20vraag%20over%20de%20Zwarte%20Cross" target="_blank"><span class="wa-fab-icon">💬</span><span class="wa-fab-label">Vraag aan Pepijn</span></a>
+<a class="wa-fab" id="wa-fab" href="#" target="_blank"><span class="wa-fab-icon">&#128172;</span><span class="wa-fab-label"></span></a>
+<script>
+(function() {
+  var w = CONTENT.whatsapp;
+  var fab = document.getElementById('wa-fab');
+  fab.href = 'https://wa.me/'+w.phone+'?text='+encodeURIComponent(w.text);
+  fab.querySelector('.wa-fab-label').textContent = w.label;
+})();
+</script>
 </body>
 </html>
