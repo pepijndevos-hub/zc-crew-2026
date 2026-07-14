@@ -337,6 +337,27 @@ if (CONFIG.updates.length > 0) {
   h += '<div class="card wide"><div class="card-lbl">Locatie</div><div class="card-val" style="font-size:17px">'+CONFIG.address+'</div><div class="card-sub">Festivalterrein de Schans &mdash; Lichtenvoorde</div></div>';
   h += '</div>';
 
+  h += '<div class="sect">FACTS &amp; FIGURES</div>';
+  h += '<div class="card-grid" style="margin-bottom:10px">';
+  h += '<div class="card"><div class="card-lbl">Editie</div><div class="card-val">15<span style="font-size:16px;color:var(--muted)">e jaar</span></div><div class="card-sub">Zwarte Cross sinds 1997</div></div>';
+  h += '<div class="card"><div class="card-lbl">Bezoekers 2025</div><div class="card-val">277<span style="font-size:16px;color:var(--muted)">k</span></div><div class="card-sub">Groeit elk jaar</div></div>';
+  h += '<div class="card"><div class="card-lbl">Per dag gemiddeld</div><div class="card-val">73<span style="font-size:16px;color:var(--muted)">.500</span></div><div class="card-sub">52% dagbezoeker &middot; 48% camping</div></div>';
+  h += '<div class="card"><div class="card-lbl">Pizza slices 2025</div><div class="card-val">110<span style="font-size:16px;color:var(--muted)">k+</span></div><div class="card-sub">Op 4 locaties verkocht</div></div>';
+  h += '<div class="card"><div class="card-lbl">Herkomst</div><div class="card-val">98<span style="font-size:16px;color:var(--muted)">%</span></div><div class="card-sub">Uit Nederland &middot; 37% Gelderland</div></div>';
+  h += '<div class="card"><div class="card-lbl">Uitverkocht</div><div class="card-val" style="color:var(--orange);font-size:18px">Sinds 2016</div><div class="card-sub">Dit jaar 5% minder bezoekers gepland</div></div>';
+  h += '</div>';
+
+  h += '<div class="sect">OPENINGSTIJDEN</div>';
+  h += '<div class="card-grid" style="margin-bottom:10px">';
+  h += '<div class="card card-yellow"><div class="card-lbl">Donderdag 16 juli</div><div class="card-val" style="font-size:16px">15:00 &ndash; 02:30</div><div class="card-sub">Camping open vanaf 08:00. Crossbaan opent later.</div></div>';
+  h += '<div class="card card-yellow"><div class="card-lbl">Vrijdag 17 juli</div><div class="card-val" style="font-size:16px">10:00 &ndash; 01:00</div><div class="card-sub">&nbsp;</div></div>';
+  h += '<div class="card card-yellow"><div class="card-lbl">Zaterdag 18 juli</div><div class="card-val" style="font-size:16px">10:00 &ndash; 01:00</div><div class="card-sub">Drukste dag van het festival</div></div>';
+  h += '<div class="card wide card-yellow"><div class="card-lbl">Zondag 19 juli</div><div class="card-val" style="font-size:16px">Wisselend per area</div><div class="card-sub">Mainstage + Theaterweide tot 23:30 &middot; Festivalterrein 2 tot 21:45 &middot; Megatent tot 24:00</div></div>';
+  h += '</div>';
+
+  h += '<div class="sect">SOCIALE AGENDA</div>';
+  h += '<div class="card wide" style="border-left:3px solid var(--orange);margin-bottom:10px"><div class="card-lbl">&#127789; PERSONEELS BBQ</div><div class="card-val" style="font-size:18px">Woensdagavond 19:00 uur</div><div class="card-sub">Locatie: bij de campingwinkel. Voor wie woensdag werkt of donderdag vroeg begint. Goede start van het festival samen!</div></div>';
+
   h += '<div class="sect">VERVOER NAAR HET TERREIN</div>';
   h += '<div class="transport-grid">';
 
@@ -396,7 +417,26 @@ if (CONFIG.updates.length > 0) {
   } else {
     h += '<div class="video-wrap"><div class="video-ph"><span>&#127909;</span><p>Video volgt binnenkort</p></div></div>';
   }
-  h += '<p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:10px">We overnachten op de crewcamping. Zoek bij aankomst de andere 3D Events tenten op &#8212; we proberen zoveel mogelijk bij elkaar te staan. Sanitaire voorzieningen voor medewerkers aanwezig.</p>';
+  h += '<p style="font-size:13px;color:var(--muted);line-height:1.6;margin-bottom:10px">We overnachten op de crewcamping (bij Backstage Oost). Zoek bij aankomst de andere 3D Events tenten op &#8212; we proberen zoveel mogelijk bij elkaar te staan.</p>';
+
+  h += '<div style="background:rgba(232,80,10,.1);border:1px solid rgba(232,80,10,.3);border-radius:var(--radius);padding:14px;margin-bottom:10px">';
+  h += '<div style="font-family:var(--display);font-size:13px;letter-spacing:1px;color:var(--orange);margin-bottom:10px">LET OP: CREWBAR &amp; ACCREDITATIE ZIJN DIT JAAR BIJ BACKSTAGE WEST</div>';
+  h += '<div style="display:flex;flex-direction:column;gap:8px">';
+  var steps = [
+    ['1','Haal je campingbandje op bij de crewcamping (Backstage Oost)'],
+    ['2','Zet je tent op op de crewcamping'],
+    ['3','Neem de pendelbus naar Backstage West (rijdt 24/7)'],
+    ['4','Accrediteer bij ingang West voor toegang tot het terrein'],
+    ['5','Dan kun je aan de slag!']
+  ];
+  steps.forEach(function(s) {
+    h += '<div style="display:flex;gap:10px;align-items:flex-start;font-size:13px;color:var(--text)">';
+    h += '<span style="background:var(--orange);color:#fff;font-family:var(--display);font-size:14px;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0">'+s[0]+'</span>';
+    h += '<span style="padding-top:2px">'+s[1]+'</span></div>';
+  });
+  h += '</div>';
+  h += '<div style="font-size:11px;color:var(--muted);margin-top:10px">&#128652; Pendelbus rijdt 24 uur per dag van Backstage West naar de crewcamping en terug.</div>';
+  h += '</div>';
   h += '<div class="sect">ROUTEBESCHRIJVING TERREIN</div>';
   h += '<img src="routekaart.jpg" style="width:100%;border-radius:var(--radius);margin-bottom:4px" alt="Routebeschrijving Zwarte Cross terrein">';
   h += '<p style="font-size:12px;color:var(--muted);margin-bottom:4px">Route vanaf Backstage Roemaat naar o.a. Backstage West en de crewcamping.</p>';
