@@ -506,7 +506,7 @@ if (CONFIG.updates.length > 0) {
   h += '<table class="kl-table"><thead><tr><th>Werkplek</th><th>Kleding</th></tr></thead><tbody>';
   [['Pizza units','Dr. Oetker shirt + cap'],['Unox / Ola karretjes','Rode polo'],['Campingwinkel','T-shirt of polo 3D Events'],['Festival All-Round','Unox of Ola kleding']].forEach(function(k) {
     h += '<tr><td><strong>'+k[0]+'</strong></td><td>'+k[1]+'</td></tr>';
-  });
+  h += '</tbody></table><div style="background:var(--surf);border:1px solid var(--border2);border-radius:var(--radius);padding:14px;margin-bottom:16px;font-size:13px;line-height:1.6">' + '&#9728;&#65039; <strong>Bij warm weer:</strong> Een degelijke korte broek mag. ' + '<strong>Niet</strong> bij bandovens of bakplaten (pizza productie) &mdash; daar is een lange broek verplicht. Unox kar valt hier niet onder.' + '<div style="background:rgba(232,80,10,.1);border-left:3px solid var(--orange);padding:8px 12px;border-radius:3px;margin:8px 0;color:var(--text)">' + 'Per unit zijn sloven/schorten beschikbaar.</div>' + '<div style="color:var(--muted)">&#128095; Altijd stevige schoenen &mdash; <strong style="color:var(--text)">geen sandalen of slippers.</strong><br>' + '&#9888;&#65039; Neem voor de zekerheid altijd je lange broek mee naar de werklocatie.</div></div>';
   h += '</tbody></table><p style="font-size:12px;color:var(--muted);margin-bottom:16px">Altijd een <strong style="color:var(--text)">lange zwarte of blauwe spijkerbroek.</strong> Shirt ontvang je op locatie en lever je aan het einde in.</p>';
 
   h += '<div class="sect">TELEFOON PER WERKPLEK</div>';
@@ -636,7 +636,7 @@ window.addEventListener('scroll', function() {
     ['Wat doe ik bij noodgevallen \'s nachts?','Meld het altijd bij je leidinggevende. Die zorgt voor de juiste opvolging.'],
     ['Mag ik mijn telefoon gebruiken tijdens het werk?','In overleg met je leidinggevende. Niet tijdens klantcontact of drukke momenten.'],
     ['Waar kan ik douchen?','Op de crewcamping zijn sanitaire voorzieningen uitsluitend voor medewerkers.'],
-    ['Wat trek ik aan op het werk?','Altijd een lange zwarte of blauwe spijkerbroek. Je shirt ontvang je op locatie. Een korte broek is alleen in overleg met je leidinggevende toegestaan en is niet voor elke functie mogelijk.']
+    ['Wat trek ik aan op het werk?','Bij warm weer mag een degelijke korte broek. Uitzondering: bij bandovens of bakplaten (pizza productie) is een lange broek verplicht vanwege veiligheid. Unox kar valt hier niet onder. Per unit zijn sloven/schorten beschikbaar. Altijd stevige schoenen &#8212; geen sandalen of slippers. Neem voor de zekerheid altijd je lange broek mee naar de werklocatie.']
   ];
   var h = '';
   faqs.forEach(function(faq, i) {
