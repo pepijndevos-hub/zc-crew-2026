@@ -402,8 +402,12 @@ var CONTENT = {
   crewPointDay: 'Achter Pizza 2',
   crewPointMorning: 'Witte partytent op de crewcamping',
 
+  // Meldtijd schakelt AUTOMATISCH om op switchIso (op basis van de klok van de bezoeker).
+  // Wijzig hier alleen als de datum/tijd of de aantal minuten verandert.
+  reportTime: { switchIso: '2026-07-18T04:00:00', before: 60, after: 45 },
+
   arrivalTimes: [
-    ['&#128336;','Meld je <strong>60 minuten</strong> voor je shift bij de witte partytent op de crewcamping.'],
+    ['&#128336;','__REPORT_TIME__'],
     ['&#128694;','Met de pendelbus duurt de rit naar het festivalterrein <strong>50 minuten.</strong>'],
     ['&#128197;','Je rooster ontvang je <strong>een dag van tevoren.</strong>'],
     ['&#8987;','Wees <strong>15 minuten</strong> voor je shift op de werklocatie. Ben je 30 minuten eerder, dan kun je alvast wat eten.']
@@ -462,7 +466,7 @@ var CONTENT = {
     ['Wanneer weet ik wanneer ik werk?','Je hoort je rooster een dag van tevoren. Werktijden kunnen licht wijzigen afhankelijk van de drukte &#8212; je hoort dit op locatie.'],
     ['Waar meld ik me aan bij aankomst?','__ARRIVAL_ANSWER__'],
     ['Hoe kom ik op het festivalterrein?','Je krijgt een persoonlijk armbandje voor de crewcamping en het festivalterrein. Niet overdraagbaar.'],
-    ['Hoe ver is het naar mijn werkplek?','Met de pendelbus 50 minuten vanaf de crewcamping naar het festivalterrein. Meld je 60 minuten voor je shift bij de witte partytent op de crewcamping.'],
+    ['Hoe ver is het naar mijn werkplek?','__TRAVEL_ANSWER__'],
     ['Krijg ik eten en drinken?','Ja. Ontbijt wordt geregeld op de camping. Gratis drinken in de crewcatering, ook buiten je dienst. Er is eetgelegenheid voor en na je shift.'],
     ['Mag ik alcohol drinken voor mijn dienst?','Nee. Geen alcohol of drugs voor of tijdens je dienst. Bij het geringste vermoeden word je uitgesloten van werkzaamheden.'],
     ['Wat als mijn armbandje kapot gaat?','Direct melden bij je leidinggevende. In overleg te wisselen bij de organisatie. Kapot = geen toegang.'],
@@ -507,6 +511,12 @@ var CONTENT = {
 <div id="p-faq" class="panel"></div>
 
 <script>
+// ── HELPERS ─────────────────────────────────────
+function getReportMinutes() {
+  var rt = CONTENT.reportTime;
+  return (new Date() >= new Date(rt.switchIso)) ? rt.after : rt.before;
+}
+
 // ── TAB SWITCHING ──────────────────────────────
 document.querySelectorAll('.tab-btn').forEach(function(btn) {
   btn.addEventListener('click', function() {
@@ -671,8 +681,10 @@ document.getElementById('hdr-year').textContent = CONTENT.meta.year;
   h += '<div class="cp-note">Overdag: <strong style="color:var(--text)">'+C.crewPointDay+'</strong><br>\'s Ochtends vroeg: <strong style="color:var(--text)">'+C.crewPointMorning+'</strong><br>\'s Nachts alleen bij noodgevallen &mdash; app Pepijn, hij belt terug.</div>';
 
   h += '<div class="sect">AANKOMST & TIJDEN</div>';
+  var reportMin = getReportMinutes();
   C.arrivalTimes.forEach(function(t) {
-    h += '<div class="rule-item"><div class="rule-ico">'+t[0]+'</div><div>'+t[1]+'</div></div>';
+    var text = t[1] === '__REPORT_TIME__' ? 'Meld je <strong>'+reportMin+' minuten</strong> voor je shift bij de witte partytent op de crewcamping.' : t[1];
+    h += '<div class="rule-item"><div class="rule-ico">'+t[0]+'</div><div>'+text+'</div></div>';
   });
 
   h += '<div class="sect">PAUZES (RICHTLIJN)</div>';
@@ -785,9 +797,12 @@ window.addEventListener('scroll', function() {
 (function() {
   var names = CONTENT.contacts.map(function(c){ return c.name.split(' ')[0]; }).join(' of ');
   var arrivalAnswer = 'Bij '+names+'. Overdag: '+CONTENT.crewPointDay+'. \'s Ochtends vroeg: '+CONTENT.crewPointMorning+'. Kom eerst langs voordat je je dienst start.';
+  var travelAnswer = 'Met de pendelbus 50 minuten vanaf de crewcamping naar het festivalterrein. Meld je '+getReportMinutes()+' minuten voor je shift bij de witte partytent op de crewcamping.';
   var h = '';
   CONTENT.faq.forEach(function(faq, i) {
-    var answer = faq[1] === '__ARRIVAL_ANSWER__' ? arrivalAnswer : faq[1];
+    var answer = faq[1];
+    if (answer === '__ARRIVAL_ANSWER__') answer = arrivalAnswer;
+    if (answer === '__TRAVEL_ANSWER__') answer = travelAnswer;
     h += '<div class="faq-item" id="fi'+i+'"><div class="faq-q" data-faq="'+i+'"><span>'+faq[0]+'</span><span class="faq-arrow">&#8964;</span></div><div class="faq-a">'+answer+'</div></div>';
   });
   document.getElementById('p-faq').innerHTML = h;
