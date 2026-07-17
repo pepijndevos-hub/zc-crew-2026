@@ -43,7 +43,11 @@ body{font-family:var(--body);font-size:15px;background:var(--bg);color:var(--tex
 
 /* UPDATES */
 #updates-wrap{display:none;margin:14px 14px 0;border-left:4px solid var(--yellow);background:#161600;border-radius:2px;overflow:hidden}
-.upd-head{padding:8px 14px;display:flex;align-items:center;gap:8px}
+.upd-head{padding:8px 14px;display:flex;align-items:center;gap:8px;cursor:pointer}
+.upd-arrow{margin-left:auto;font-size:14px;color:var(--muted);transition:transform .2s;flex-shrink:0}
+#updates-wrap.open .upd-arrow{transform:rotate(180deg)}
+.upd-body{display:none;max-height:340px;overflow-y:auto}
+#updates-wrap.open .upd-body{display:block}
 .upd-dot{width:7px;height:7px;border-radius:50%;background:var(--yellow);animation:blink 2s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 .upd-title{font-family:var(--display);font-size:14px;letter-spacing:1.5px;color:var(--yellow);text-transform:uppercase}
@@ -482,8 +486,8 @@ var CONTENT = {
 </header>
 
 <div id="updates-wrap">
-  <div class="upd-head"><div class="upd-dot"></div><div class="upd-title">UPDATES</div></div>
-  <div id="updates-list"></div>
+  <div class="upd-head" id="upd-toggle"><div class="upd-dot"></div><div class="upd-title">UPDATES</div><span class="upd-arrow">&#8964;</span></div>
+  <div id="updates-list" class="upd-body"></div>
 </div>
 
 <div class="tabs-rail">
@@ -535,6 +539,10 @@ document.getElementById('hdr-year').textContent = CONTENT.meta.year;
   document.getElementById('updates-wrap').style.display = 'block';
   document.querySelector('.upd-title').textContent = 'UPDATES' + (unseenCount > 0 ? ' \u2014 ' + unseenCount + ' NIEUW' : '');
   document.querySelector('.upd-dot').style.animation = (lastSeen === null || unseenCount > 0) ? '' : 'none';
+
+  document.getElementById('upd-toggle').addEventListener('click', function() {
+    document.getElementById('updates-wrap').classList.toggle('open');
+  });
 
   var ul = document.getElementById('updates-list');
   sorted.forEach(function(u) {
