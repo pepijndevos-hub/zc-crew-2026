@@ -368,7 +368,12 @@ var CONTENT = {
       'Accrediteer bij ingang West voor toegang tot het terrein',
       'Dan kun je aan de slag!'
     ],
-    footnote: '&#128652; Pendelbus rijdt 24 uur per dag van Backstage West naar de crewcamping en terug.'
+    footnote: '&#128652; Pendelbus rijdt 24 uur per dag van Backstage West naar de crewcamping en terug.',
+    etiquette: [
+      ['&#128465;&#65039;','Laat geen rommel slingeren. Vuilniszakken zijn te krijgen bij de co&ouml;rdinatie.'],
+      ['&#128564;','Denk aan je collega&#39;s bij thuiskomst &#39;s nachts en vertrek &#39;s ochtends &mdash; probeer zo min mogelijk lawaai te maken. Nachtdienst-collega&#39;s slapen overdag.'],
+      ['&#128279;','Campingregels van de Zwarte Cross: <a href="https://www.zwartecross.nl/camping/campingreglementen/" target="_blank" style="color:var(--orange)">zwartecross.nl/camping/campingreglementen</a>']
+    ]
   },
 
   route: {
@@ -392,7 +397,7 @@ var CONTENT = {
     ['&#127774;','Zonnebrand elke dag opnieuw, ook als het bewolkt lijkt.'],
     ['&#127820;','Neem een snack mee voor in je werktas voor tijdens je pauze.'],
     ['&#128179;','Laat je portemonnee in je tent. Neem alleen wat nodig is.'],
-    ['&#128176;','Neem je geld of munten mee naar de werkplek? Geef dit aan bij je leidinggevende.']
+    ['&#128683;','Geen munten of contant geld mee naar je werkplek. Laat dit achter &mdash; een pinpas is prima.']
   ],
 
   contacts: [
@@ -401,6 +406,7 @@ var CONTENT = {
   ],
   crewPointDay: 'Achter Pizza 2',
   crewPointMorning: 'Witte partytent op de crewcamping',
+  departureNote: 'Dit is ook het centrale vertrekpunt naar je werkplek. Zorg dat je bij vertrek <strong style="color:var(--text)">geen munten en contant geld op zak hebt</strong> &mdash; een pinpas is prima.',
 
   // Meldtijd schakelt AUTOMATISCH om op switchIso (op basis van de klok van de bezoeker).
   // Wijzig hier alleen als de datum/tijd of de aantal minuten verandert.
@@ -459,8 +465,10 @@ var CONTENT = {
     ['&#128721;','<strong>Geen alcohol</strong> voor of tijdens je dienst. Bij vermoeden word je direct uitgesloten van werkzaamheden.'],
     ['&#128721;','<strong>Drugs zijn ten allen tijde verboden.</strong> Elk vermoeden van gebruik kan leiden tot direct naar huis gestuurd worden.'],
     ['&#128683;','Roken alleen in pauzes, buiten zicht van bezoekers, met toestemming leidinggevende.'],
+    ['&#128683;','Heb je geen dienst? Dan is het niet toegestaan om op de werkvloer aanwezig te zijn.'],
     ['&#9989;','Kapot armbandje? Meld bij je leidinggevende &mdash; te wisselen bij de organisatie.'],
-    ['&#9989;','Gratis drinken in de crewcatering &#8212; je passeert die onderweg van Backstage West naar je werkplek. Neem altijd wat mee, ook naar de crewcamping. Zo heb je ook tijdens je dienst en &#39;s avonds op de camping genoeg.']
+    ['&#9989;','Gratis drinken in de crewcatering &#8212; je passeert die onderweg van Backstage West naar je werkplek. Neem altijd wat mee, ook naar de crewcamping. Zo heb je ook tijdens je dienst en &#39;s avonds op de camping genoeg.'],
+    ['&#127866;','Bier in de crewbar kost traditioneel een <strong>halve munt</strong> in plaats van 1 munt zoals op het festivalterrein.']
   ],
 
   checklist: {
@@ -662,6 +670,10 @@ document.getElementById('hdr-year').textContent = CONTENT.meta.year;
   h += '<div style="font-size:11px;color:var(--muted);margin-top:10px">'+C.crewcamping.footnote+'</div>';
   h += '</div>';
 
+  C.crewcamping.etiquette.forEach(function(e) {
+    h += '<div class="rule-item"><div class="rule-ico">'+e[0]+'</div><div>'+e[1]+'</div></div>';
+  });
+
   h += '<div class="sect">ROUTEBESCHRIJVING TERREIN</div>';
   h += '<img src="'+C.route.img+'" style="width:100%;border-radius:var(--r);margin-bottom:4px" alt="Routebeschrijving Zwarte Cross terrein">';
   h += '<p style="font-size:12px;color:var(--muted);margin-bottom:4px">'+C.route.caption+'</p>';
@@ -693,6 +705,7 @@ document.getElementById('hdr-year').textContent = CONTENT.meta.year;
     h += '<div class="ct-btns"><a class="ct-btn call" href="tel:'+tel+'">&#128222;</a><a class="ct-btn wa" href="https://wa.me/'+tel.replace('+','')+'">&#128172;</a></div></div>';
   });
   h += '<div class="cp-note">Overdag: <strong style="color:var(--text)">'+C.crewPointDay+'</strong><br>\'s Ochtends vroeg: <strong style="color:var(--text)">'+C.crewPointMorning+'</strong><br>\'s Nachts alleen bij noodgevallen &mdash; app Pepijn, hij belt terug.</div>';
+  h += '<div class="alert info" style="margin-bottom:16px">'+C.departureNote+'</div>';
 
   h += '<div class="sect">AANKOMST & TIJDEN</div>';
   var reportMin = getReportMinutes();
