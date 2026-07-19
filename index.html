@@ -428,9 +428,21 @@ var CONTENT = {
     ['Campingwinkel','T-shirt of polo 3D Events'],
     ['Festival All-Round','Unox of Ola kleding']
   ],
-  clothingNote: '&#9728;&#65039; <strong>Bij warm weer:</strong> Een degelijke korte broek mag. <strong>Niet</strong> bij bandovens of bakplaten (pizza productie) &mdash; daar is een lange broek verplicht. Unox kar valt hier niet onder.',
-  clothingWarning: 'Per unit zijn sloven/schorten beschikbaar.',
-  clothingFooter: '&#128095; Altijd stevige schoenen &mdash; <strong style="color:var(--text)">geen sandalen of slippers.</strong><br>&#9888;&#65039; Neem voor de zekerheid altijd je lange broek mee naar de werklocatie.',
+
+  clothing: {
+    intro: 'Het kledingvoorschrift is een normale lange effen spijker- of werkbroek (schoon en zonder gaten), een T-shirt en donkere stevige schoenen &mdash; veiligheidsschoenen hebben de voorkeur. Kleding dient er schoon, netjes en verzorgd uit te zien. Neem in ieder geval voldoende schone kleding mee.',
+    notes: [
+      ['&#128084;','Je draagt altijd een lange zwarte of blauwe spijkerbroek. Die beschermt je benen tijdens het werk tegen krassen, schrammen en hete producten.'],
+      ['&#129749;','Is het kouder? Dan komt een (donkere) trui van pas, of een longsleeve onder je kleding van 3D Events.'],
+      ['&#9728;&#65039;','Bij extreme hitte is een korte broek toegestaan &mdash; dit wordt per keer bepaald in overleg met de co&ouml;rdinatie en 3D Events. Uitzondering: bij bandovens of bakplaten (pizza productie) is een lange broek altijd verplicht &mdash; de Unox kar valt hier niet onder. Per unit zijn sloven/schorten beschikbaar.']
+    ],
+    shirtPolicy: [
+      'Je shirt of polo krijg je op locatie, en die willen we ook graag terug. Overleg aan het einde van de dag met de leidinggevende van de werklocatie wat te doen met je shirt of polo.',
+      'De werkkleding moet gedragen worden zoals die aan een kleerhanger hangt &mdash; dus niet opknopen e.d.',
+      'Het werkshirt mag sowieso niet gedragen worden op het festivalterrein buiten je dienst.'
+    ],
+    footer: '&#128095; Altijd stevige schoenen &mdash; <strong style="color:var(--text)">geen sandalen of slippers.</strong><br>&#129504; Besteed vanzelfsprekend zorg aan je persoonlijke hygi&euml;ne en uiterlijke verzorging.<br>&#127881; Niet aan het werk? Trek dan je meest indrukwekkende party-outfit aan &mdash; wat dat is, laten we helemaal aan jou!'
+  },
 
   phonePolicy: [
     {loc:'Unox / Ola Runners', icon:'&#128241;', regel:'Houd je telefoon bij je en aan. Je zit in een WhatsApp groep met je team voor communicatie gedurende de dag.', kleur:'var(--yellow)'},
@@ -439,11 +451,13 @@ var CONTENT = {
     {loc:'Campingwinkel', icon:'&#128683;', regel:'Telefoon achterlaten bij het oplaadpunt op de werkplek. Niet bij je tijdens het werk.', kleur:'#e04545'}
   ],
 
+  theft: {
+    text: 'De regeling rond eten en drinken (gratis drinken bij de crewcatering, verzorging op je werkplek) betekent dat er nooit noodzaak is tot diefstal of het gratis weggeven van artikelen aan mensen die je kent tijdens je dienst.<br><br>Mocht dit toch gebeuren, dan doen we helaas aangifte en sturen we je van het terrein af.'
+  },
+
   rules: [
     ['&#128721;','<strong>Geen alcohol</strong> voor of tijdens je dienst. Bij vermoeden word je direct uitgesloten van werkzaamheden.'],
     ['&#128721;','<strong>Drugs zijn ten allen tijde verboden.</strong> Elk vermoeden van gebruik kan leiden tot direct naar huis gestuurd worden.'],
-    ['&#128721;','<strong>Geen diefstal</strong> of gratis weggeven aan bekenden. Hierop volgt aangifte.'],
-    ['&#128683;','Je werkshirt mag <strong>niet</strong> gedragen worden buiten je dienst op het terrein.'],
     ['&#128683;','Roken alleen in pauzes, buiten zicht van bezoekers, met toestemming leidinggevende.'],
     ['&#9989;','Kapot armbandje? Meld bij je leidinggevende &mdash; te wisselen bij de organisatie.'],
     ['&#9989;','Gratis drinken in de crewcatering &#8212; je passeert die onderweg van Backstage West naar je werkplek. Neem altijd wat mee, ook naar de crewcamping. Zo heb je ook tijdens je dienst en &#39;s avonds op de camping genoeg.']
@@ -474,7 +488,7 @@ var CONTENT = {
     ['Wat doe ik bij noodgevallen \'s nachts?','Meld het altijd bij je leidinggevende. Die zorgt voor de juiste opvolging.'],
     ['Mag ik mijn telefoon gebruiken tijdens het werk?','In overleg met je leidinggevende. Niet tijdens klantcontact of drukke momenten.'],
     ['Waar kan ik douchen?','Op de crewcamping zijn sanitaire voorzieningen uitsluitend voor medewerkers.'],
-    ['Wat trek ik aan op het werk?','Bij warm weer mag een degelijke korte broek. Uitzondering: bij bandovens of bakplaten (pizza productie) is een lange broek verplicht vanwege veiligheid. Unox kar valt hier niet onder. Per unit zijn sloven/schorten beschikbaar. Altijd stevige schoenen &#8212; geen sandalen of slippers. Neem voor de zekerheid altijd je lange broek mee naar de werklocatie.']
+    ['Wat trek ik aan op het werk?','Standaard een lange effen spijker- of werkbroek, een T-shirt en donkere stevige schoenen. Bij extreme hitte is een korte broek toegestaan, in overleg met de co&ouml;rdinatie en 3D Events. Uitzondering: bij bandovens of bakplaten (pizza productie) is een lange broek altijd verplicht &mdash; de Unox kar valt hier niet onder. Per unit zijn sloven/schorten beschikbaar. Altijd stevige schoenen, geen sandalen of slippers.']
   ]
 
 };
@@ -694,15 +708,21 @@ document.getElementById('hdr-year').textContent = CONTENT.meta.year;
   });
   h += '</div><p style="font-size:12px;color:var(--muted);margin-bottom:16px">'+C.pauseNote+'</p>';
 
-  h += '<div class="sect">KLEDING PER WERKPLEK</div>';
+  h += '<div class="sect">KLEDING &amp; PERSOONLIJKE VERZORGING</div>';
+  h += '<p style="font-size:13px;color:var(--text);line-height:1.6;margin-bottom:10px">'+C.clothing.intro+'</p>';
+  C.clothing.notes.forEach(function(n) {
+    h += '<div class="rule-item"><div class="rule-ico">'+n[0]+'</div><div>'+n[1]+'</div></div>';
+  });
+  h += '<div style="font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:16px 0 6px">Kleding per werkplek</div>';
   h += '<table class="kl-table"><thead><tr><th>Werkplek</th><th>Kleding</th></tr></thead><tbody>';
   C.clothingTable.forEach(function(k) {
     h += '<tr><td><strong>'+k[0]+'</strong></td><td>'+k[1]+'</td></tr>';
   });
-  h += '</tbody></table><div style="background:var(--surf);border:1px solid var(--border2);border-radius:var(--r);padding:14px;margin-bottom:16px;font-size:13px;line-height:1.6">'
-    + C.clothingNote
-    + '<div style="background:rgba(232,80,10,.1);border-left:3px solid var(--orange);padding:8px 12px;border-radius:3px;margin:8px 0;color:var(--text)">' + C.clothingWarning + '</div>'
-    + '<div style="color:var(--muted)">' + C.clothingFooter + '</div></div>';
+  h += '</tbody></table>';
+  C.clothing.shirtPolicy.forEach(function(s) {
+    h += '<div class="rule-item"><div class="rule-ico">&#128085;</div><div>'+s+'</div></div>';
+  });
+  h += '<div style="background:var(--surf);border:1px solid var(--border2);border-radius:var(--r);padding:14px;margin-bottom:16px;font-size:13px;line-height:1.8;color:var(--muted)">'+C.clothing.footer+'</div>';
 
   h += '<div class="sect">TELEFOON PER WERKPLEK</div>';
   C.phonePolicy.forEach(function(t) {
@@ -710,6 +730,7 @@ document.getElementById('hdr-year').textContent = CONTENT.meta.year;
   });
 
   h += '<div class="sect">HUISREGELS</div>';
+  h += '<div class="alert" style="border:1px solid rgba(232,80,10,.3);border-left:3px solid var(--orange);background:rgba(232,80,10,.08);margin-bottom:10px"><strong style="color:var(--orange);font-family:var(--display);letter-spacing:1px;font-size:14px">DIEFSTAL</strong><br><span style="color:var(--text);font-size:13px;line-height:1.6">'+C.theft.text+'</span></div>';
   C.rules.forEach(function(r) {
     h += '<div class="rule-item"><div class="rule-ico">'+r[0]+'</div><div>'+r[1]+'</div></div>';
   });
